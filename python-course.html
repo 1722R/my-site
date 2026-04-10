@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 基础课程</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #e67e22;
+            --accent-light: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --white: #ffffff;
+            --code-bg: #1e1e2e;
+            --code-text: #cdd6f4;
+            --code-keyword: #cba6f7;
+            --code-string: #a6e3a1;
+            --code-comment: #6c7086;
+            --code-function: #89b4fa;
+            --code-number: #fab387;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .top-nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(255,255,255,0.15);
+            color: var(--white);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(230,126,34,0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(52,152,219,0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            margin-top: 5px;
+        }
+
+        /* Chapter */
+        .chapter {
+            padding: 80px 0;
+        }
+
+        .chapter:nth-child(even) {
+            background-color: var(--white);
+        }
+
+        .chapter:nth-child(odd) {
+            background-color: var(--light);
+        }
+
+        .chapter-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .chapter-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, #d35400 100%);
+            color: var(--white);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .chapter-title h2 {
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .chapter-title p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Content Blocks */
+        .content-block {
+            margin-bottom: 35px;
+        }
+
+        .content-block h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .content-block p {
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 15px;
+            font-size: 1.02rem;
+        }
+
+        .content-block ul {
+            padding-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .content-block ul li {
+            color: #555;
+            line-height: 2;
+            font-size: 1.02rem;
+        }
+
+        .content-block ul li::marker {
+            color: var(--accent);
+        }
+
+        /* Code Block */
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .code-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .code-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .code-dots span:nth-child(1) { background: #f38ba8; }
+        .code-dots span:nth-child(2) { background: #f9e2af; }
+        .code-dots span:nth-child(3) { background: #a6e3a1; }
+
+        .code-lang {
+            color: var(--code-comment);
+            font-size: 0.8rem;
+            font-family: monospace;
+        }
+
+        .code-body {
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .code-body pre {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--code-text);
+            white-space: pre;
+        }
+
+        .code-body .kw { color: var(--code-keyword); }
+        .code-body .str { color: var(--code-string); }
+        .code-body .cmt { color: var(--code-comment); font-style: italic; }
+        .code-body .fn { color: var(--code-function); }
+        .code-body .num { color: var(--code-number); }
+        .code-body .cls { color: #f9e2af; }
+        .code-body .op { color: #89dceb; }
+        .code-body .dec { color: #f38ba8; }
+
+        /* Tip Box */
+        .tip-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 25px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+
+        .tip-box .tip-title {
+            font-weight: 600;
+            color: #e65100;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .tip-box p {
+            color: #5d4037;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Table */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .content-table thead {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .content-table th {
+            padding: 14px 20px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .content-table td {
+            padding: 12px 20px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .content-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .content-table code {
+            background: var(--code-bg);
+            color: var(--code-string);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.7;
+            margin-bottom: 15px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 10px 30px;
+            background: var(--accent);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--light); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d35400; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero-stats { gap: 25px; }
+            .stat-number { font-size: 1.8rem; }
+            .nav-links { display: none; }
+            .chapter-header { flex-direction: column; text-align: center; }
+            .content-table { font-size: 0.85rem; }
+            .content-table th, .content-table td { padding: 10px 12px; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">🐍 Python 基础课程</a>
+            <div class="nav-links">
+                <a href="#chapter1">基础语法</a>
+                <a href="#chapter2">数据结构</a>
+                <a href="#chapter3">函数与模块</a>
+                <a href="#chapter4">面向对象</a>
+                <a href="#chapter5">文件与异常</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-icon">🐍</div>
+            <h1>Python 基础课程</h1>
+            <p>从零开始，系统学习 Python 编程的核心基础知识，为你的编程之路打下坚实基础。</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">核心章节</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">知识点</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">代码示例</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Chapter 1: 基础语法 ==================== -->
+    <section id="chapter1" class="chapter">
+        <div class="container">
+            <div class="chapter-header">
+                <div class="chapter-number">01</div>
+                <div class="chapter-title">
+                    <h2>Python 基础语法</h2>
+                    <p>了解 Python 的基本语法规则，包括变量、数据类型、运算符和控制结构</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>什么是 Python？</h3>
+                <p>Python 是一种简洁、易读的高级编程语言，由 Guido van Rossum 于 1991 年发布。它以代码可读性强、语法简洁著称，广泛应用于 Web 开发、数据分析、人工智能、自动化脚本等领域。</p>
+                <div class="tip-box">
+                    <div class="tip-title">💡 为什么选择 Python？</div>
+                    <p>Python 语法接近自然语言，学习曲线平缓，是编程入门的最佳选择之一。同时它拥有丰富的第三方库生态，可以应对几乎任何编程需求。</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>变量与赋值</h3>
+                <p>Python 中不需要声明变量类型，直接赋值即可。变量名由字母、数字和下划线组成，不能以数字开头。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># 变量赋值 - Python 会自动推断类型</span>
+<span class="name">name</span> <span class="op">=</span> <span class="str">"张三"</span>          <span class="cmt"># 字符串类型</span>
+<span class="name">age</span> <span class="op">=</span> <span class="num">20</span>               <span class="cmt"># 整数类型</span>
+<span class="name">height</span> <span class="op">=</span> <span class="num">1.75</span>          <span class="cmt"># 浮点数类型</span>
+<span class="name">is_student</span> <span class="op">=</span> <span class="kw">True</span>     <span class="cmt"># 布尔类型</span>
+
+<span class="cmt"># 多重赋值</span>
+<span class="name">x</span>, <span class="name">y</span>, <span class="name">z</span> <span class="op">=</span> <span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>
+
+<span class="cmt"># 输出变量</span>
+<span class="fn">print</span>(<span class="str">f"</span><span class="name">{name}</span><span class="str">今年</span><span class="name">{age}</span><span class="str">岁"</span>)  <span class="cmt"># f-string 格式化</span></pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>基本数据类型</h3>
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th>类型</th>
+                            <th>关键字</th>
+                            <th>示例</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>整数</td>
+                            <td><code>int</code></td>
+                            <td><code>42</code>, <code>-7</code></td>
+                            <td>没有大小限制</td>
+                        </tr>
+                        <tr>
+                            <td>浮点数</td>
+                            <td><code>float</code></td>
+                            <td><code>3.14</code>, <code>-0.5</code></td>
+                            <td>带小数点的数字</td>
+                        </tr>
+                        <tr>
+                            <td>字符串</td>
+                            <td><code>str</code></td>
+                            <td><code>"hello"</code>, <code>'world'</code></td>
+                            <td>文本数据，不可变</td>
+                        </tr>
+                        <tr>
+                            <td>布尔值</td>
+                            <td><code>bool</code></td>
+                            <td><code>True</code>, <code>False</code></td>
+                            <td>逻辑判断</td>
+                        </tr>
+                        <tr>
+                            <td>空值</td>
+                            <td><code>NoneType</code></td>
+                            <td><code>None</code></td>
+                            <td>表示"没有值"</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-block">
+                <h3>运算符</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># 算术运算符</span>
+<span class="fn">print</span>(<span class="num">10</span> <span class="op">+</span> <span class="num">3</span>)    <span class="cmt"># 13  加法</span>
+<span class="fn">print</span>(<span class="num">10</span> <span class="op">-</span> <span class="num">3</span>)    <span class="cmt"># 7   减法</span>
+<span class="fn">print</span>(<span class="num">10</span> <span class="op">*</span> <span class="num">3</span>)    <span class="cmt"># 30  乘法</span>
+<span class="fn">print</span>(<span class="num">10</span> <span class="op">/</span> <span class="num">3</span>)    <span class="cmt"># 3.333... 除法（返回浮点数）</span>
+<span class="fn">print</span>(<span class="num">10</span> <span class="op">//</span> <span class="num">3</span>)   <span class="cmt"># 3   整除</span>
+<span class="fn">print</span>(<span class="num">10</span> <span class="op">%</span> <span class="num">3</span>)    <span class="cmt"># 1   取余</span>
+<span class="fn">print</span>(<span class="num">10</span> <span class="op">**</span> <span class="num">3</span>)   <span class="cmt"># 1000 幂运算</span>
+
+<span class="cmt"># 比较运算符</span>
+<span class="fn">print</span>(<span class="num">10</span> <span class="op">==</span> <span class="num">3</span>)   <span class="cmt"># False  等于</span>
+<span class="fn">print</span>(<span class="num">10</span> <span class="op">!=</span> <span class="num">3</span>)   <span class="cmt"># True   不等于</span>
+<span class="fn">print</span>(<span class="num">10</span> <span class="op">></span> <span class="num">3</span>)    <span class="cmt"># True   大于</span>
+<span class="fn">print</span>(<span class="num">10</span> <span class="op">>=</span> <span class="num">10</span>)  <span class="cmt"># True   大于等于</span>
+
+<span class="cmt"># 逻辑运算符</span>
+<span class="fn">print</span>(<span class="kw">True</span> <span class="kw">and</span> <span class="kw">False</span>)  <span class="cmt"># False  与</span>
+<span class="fn">print</span>(<span class="kw">True</span> <span class="kw">or</span> <span class="kw">False</span>)   <span class="cmt"># True   或</span>
+<span class="fn">print</span>(<span class="kw">not</span> <span class="kw">True</span>)         <span class="cmt"># False  非</span></pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>条件语句</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="name">score</span> <span class="op">=</span> <span class="num">85</span>
+
+<span class="kw">if</span> <span class="name">score</span> <span class="op">>=</span> <span class="num">90</span>:
+    <span class="fn">print</span>(<span class="str">"优秀"</span>)
+<span class="kw">elif</span> <span class="name">score</span> <span class="op">>=</span> <span class="num">80</span>:
+    <span class="fn">print</span>(<span class="str">"良好"</span>)      <span class="cmt"># ← 会执行这行</span>
+<span class="kw">elif</span> <span class="name">score</span> <span class="op">>=</span> <span class="num">60</span>:
+    <span class="fn">print</span>(<span class="str">"及格"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"不及格"</span>)
+
+<span class="cmt"># 三元表达式（条件表达式）</span>
+<span class="name">result</span> <span class="op">=</span> <span class="str">"及格"</span> <span class="kw">if</span> <span class="name">score</span> <span class="op">>=</span> <span class="num">60</span> <span class="kw">else</span> <span class="str">"不及格"</span></pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>循环语句</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># for 循环 - 遍历序列</span>
+<span class="kw">for</span> <span class="name">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>):
+    <span class="fn">print</span>(<span class="str">f"第 </span><span class="name">{i+1}</span><span class="str"> 次循环"</span>)  <span class="cmt"># 1, 2, 3, 4, 5</span>
+
+<span class="cmt"># 遍历列表</span>
+<span class="name">fruits</span> <span class="op">=</span> [<span class="str">"苹果"</span>, <span class="str">"香蕉"</span>, <span class="str">"橙子"</span>]
+<span class="kw">for</span> <span class="name">fruit</span> <span class="kw">in</span> <span class="name">fruits</span>:
+    <span class="fn">print</span>(<span class="name">fruit</span>)
+
+<span class="cmt"># while 循环</span>
+<span class="name">count</span> <span class="op">=</span> <span class="num">0</span>
+<span class="kw">while</span> <span class="name">count</span> <span class="op"><</span> <span class="num">3</span>:
+    <span class="fn">print</span>(<span class="str">f"count = </span><span class="name">{count}</span><span class="str">"</span>)
+    <span class="name">count</span> <span class="op">+=</span> <span class="num">1</span>
+
+<span class="cmt"># break 和 continue</span>
+<span class="kw">for</span> <span class="name">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">10</span>):
+    <span class="kw">if</span> <span class="name">i</span> <span class="op">==</span> <span class="num">3</span>:
+        <span class="kw">continue</span>  <span class="cmt"># 跳过 3</span>
+    <span class="kw">if</span> <span class="name">i</span> <span class="op">==</span> <span class="num">7</span>:
+        <span class="kw">break</span>     <span class="cmt"># 到 7 停止</span>
+    <span class="fn">print</span>(<span class="name">i</span>, <span class="name">end</span><span class="op">=</span><span class="str">" "</span>)  <span class="cmt"># 输出: 0 1 2 4 5 6</span></pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>字符串操作</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="name">s</span> <span class="op">=</span> <span class="str">"Hello, Python!"</span>
+
+<span class="cmt"># 索引与切片</span>
+<span class="fn">print</span>(<span class="name">s</span>[<span class="num">0</span>])       <span class="cmt"># 'H'       第一个字符</span>
+<span class="fn">print</span>(<span class="name">s</span>[<span class="op">-</span><span class="num">1</span>])      <span class="cmt"># '!'       最后一个字符</span>
+<span class="fn">print</span>(<span class="name">s</span>[<span class="num">0</span>:<span class="num">5</span>])     <span class="cmt"># 'Hello'   切片 [起始:结束)</span>
+<span class="fn">print</span>(<span class="name">s</span>[<span class="num">7</span>:])      <span class="cmt"># 'Python!' 从索引7到末尾</span>
+
+<span class="cmt"># 常用方法</span>
+<span class="fn">print</span>(<span class="name">s</span>.<span class="fn">upper</span>())       <span class="cmt"># 'HELLO, PYTHON!'</span>
+<span class="fn">print</span>(<span class="name">s</span>.<span class="fn">lower</span>())       <span class="cmt"># 'hello, python!'</span>
+<span class="fn">print</span>(<span class="name">s</span>.<span class="fn">split</span>(<span class="str">", "</span>))   <span class="cmt"># ['Hello', 'Python!']</span>
+<span class="fn">print</span>(<span class="str">"-"</span>.<span class="fn">join</span>([<span class="str">"a"</span>, <span class="str">"b"</span>]))  <span class="cmt"># 'a-b'</span>
+<span class="fn">print</span>(<span class="str">"  hello  "</span>.<span class="fn">strip</span>())  <span class="cmt"># 'hello'  去除空格</span>
+<span class="fn">print</span>(<span class="name">s</span>.<span class="fn">replace</span>(<span class="str">"Python"</span>, <span class="str">"World"</span>))  <span class="cmt"># 'Hello, World!'</span></pre></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Chapter 2: 数据结构 ==================== -->
+    <section id="chapter2" class="chapter">
+        <div class="container">
+            <div class="chapter-header">
+                <div class="chapter-number">02</div>
+                <div class="chapter-title">
+                    <h2>数据结构</h2>
+                    <p>掌握 Python 中最常用的数据结构：列表、元组、字典和集合</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>列表（List）</h3>
+                <p>列表是 Python 中最常用的数据结构，用方括号 <code>[]</code> 表示，可以存储任意类型的元素，支持增删改查操作。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># 创建列表</span>
+<span class="name">fruits</span> <span class="op">=</span> [<span class="str">"苹果"</span>, <span class="str">"香蕉"</span>, <span class="str">"橙子"</span>]
+<span class="name">numbers</span> <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>]
+<span class="name">mixed</span> <span class="op">=</span> [<span class="num">1</span>, <span class="str">"hello"</span>, <span class="kw">True</span>, <span class="num">3.14</span>]
+
+<span class="cmt"># 增加元素</span>
+<span class="name">fruits</span>.<span class="fn">append</span>(<span class="str">"葡萄"</span>)          <span class="cmt"># 末尾添加</span>
+<span class="name">fruits</span>.<span class="fn">insert</span>(<span class="num">1</span>, <span class="str">"西瓜"</span>)        <span class="cmt"># 在索引1处插入</span>
+<span class="name">fruits</span>.<span class="fn">extend</span>([<span class="str">"芒果"</span>, <span class="str">"草莓"</span>])  <span class="cmt"># 合并列表</span>
+
+<span class="cmt"># 删除元素</span>
+<span class="name">fruits</span>.<span class="fn">remove</span>(<span class="str">"香蕉"</span>)   <span class="cmt"># 按值删除</span>
+<span class="name">popped</span> <span class="op">=</span> <span class="name">fruits</span>.<span class="fn">pop</span>()    <span class="cmt"># 删除并返回末尾元素</span>
+<span class="kw">del</span> <span class="name">fruits</span>[<span class="num">0</span>]              <span class="cmt"># 按索引删除</span>
+
+<span class="cmt"># 列表推导式（Python 特色！）</span>
+<span class="name">squares</span> <span class="op">=</span> [<span class="name">x</span><span class="op">**</span><span class="num">2</span> <span class="kw">for</span> <span class="name">x</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">10</span>)]
+<span class="cmt"># [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</span>
+
+<span class="name">evens</span> <span class="op">=</span> [<span class="name">x</span> <span class="kw">for</span> <span class="name">x</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">20</span>) <span class="kw">if</span> <span class="name">x</span> <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>]
+<span class="cmt"># [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]</span>
+
+<span class="cmt"># 常用操作</span>
+<span class="fn">print</span>(<span class="fn">len</span>(<span class="name">fruits</span>))     <span class="cmt"># 列表长度</span>
+<span class="fn">print</span>(<span class="fn">sorted</span>(<span class="name">numbers</span>))  <span class="cmt"># 排序（返回新列表）</span>
+<span class="fn">print</span>(<span class="str">"苹果"</span> <span class="kw">in</span> <span class="name">fruits</span>)  <span class="cmt"># True  成员判断</span></pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>元组（Tuple）</h3>
+                <p>元组与列表类似，但一旦创建就<strong>不可修改</strong>。用圆括号 <code>()</code> 表示，适合存储不应被改变的数据。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># 创建元组</span>
+<span class="name">point</span> <span class="op">=</span> (<span class="num">3</span>, <span class="num">4</span>)
+<span class="name">rgb</span> <span class="op">=</span> (<span class="num">255</span>, <span class="num">128</span>, <span class="num">0</span>)
+<span class="name">single</span> <span class="op">=</span> (<span class="num">42</span>,)   <span class="cmt"># 单元素元组必须加逗号</span>
+
+<span class="cmt"># 元组解包</span>
+<span class="name">x</span>, <span class="name">y</span> <span class="op">=</span> <span class="name">point</span>
+<span class="fn">print</span>(<span class="name">x</span>, <span class="name">y</span>)  <span class="cmt"># 3 4</span>
+
+<span class="cmt"># 元组不可变，但可以包含可变对象</span>
+<span class="name">info</span> <span class="op">=</span> (<span class="str">"张三"</span>, [<span class="num">90</span>, <span class="num">85</span>, <span class="num">92</span>])
+<span class="name">info</span>[<span class="num">1</span>].<span class="fn">append</span>(<span class="num">88</span>)  <span class="cmt"># 可以修改内部列表</span></pre></div>
+                </div>
+                <div class="tip-box">
+                    <div class="tip-title">💡 列表 vs 元组</div>
+                    <p>列表是可变的，适合需要频繁修改的数据；元组是不可变的，运行速度更快，适合存储常量数据（如坐标、配置信息），并且可以作为字典的键。</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>字典（Dictionary）</h3>
+                <p>字典是键值对（key-value）的无序集合，用花括号 <code>{}</code> 表示，通过键来快速访问值。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># 创建字典</span>
+<span class="name">student</span> <span class="op">=</span> {
+    <span class="str">"name"</span>: <span class="str">"张三"</span>,
+    <span class="str">"age"</span>: <span class="num">20</span>,
+    <span class="str">"major"</span>: <span class="str">"计算机科学"</span>,
+    <span class="str">"scores"</span>: {<span class="str">"math"</span>: <span class="num">90</span>, <span class="str">"english"</span>: <span class="num">85</span>}
+}
+
+<span class="cmt"># 访问与修改</span>
+<span class="fn">print</span>(<span class="name">student</span>[<span class="str">"name"</span>])           <span class="cmt"># '张三'</span>
+<span class="fn">print</span>(<span class="name">student</span>.<span class="fn">get</span>(<span class="str">"gpa"</span>, <span class="num">0</span>))    <span class="cmt"># 0（默认值）</span>
+<span class="name">student</span>[<span class="str">"age"</span>] <span class="op">=</span> <span class="num">21</span>               <span class="cmt"># 修改值</span>
+
+<span class="cmt"># 添加与删除</span>
+<span class="name">student</span>[<span class="str">"email"</span>] <span class="op">=</span> <span class="str">"zhangsan@email.com"</span>
+<span class="kw">del</span> <span class="name">student</span>[<span class="str">"major"</span>]
+
+<span class="cmt"># 遍历字典</span>
+<span class="kw">for</span> <span class="name">key</span>, <span class="name">value</span> <span class="kw">in</span> <span class="name">student</span>.<span class="fn">items</span>():
+    <span class="fn">print</span>(<span class="str">f"</span><span class="name">{key}</span><span class="str">: </span><span class="name">{value}</span><span class="str">"</span>)
+
+<span class="cmt"># 字典推导式</span>
+<span class="name">squares_dict</span> <span class="op">=</span> {<span class="name">x</span>: <span class="name">x</span><span class="op">**</span><span class="num">2</span> <span class="kw">for</span> <span class="name">x</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">6</span>)}
+<span class="cmt"># {0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25}</span></pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>集合（Set）</h3>
+                <p>集合是无序、不重复元素的容器，常用于去重和数学运算（交集、并集、差集）。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># 创建集合</span>
+<span class="name">a</span> <span class="op">=</span> {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>}
+<span class="name">b</span> <span class="op">=</span> {<span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>, <span class="num">7</span>, <span class="num">8</span>}
+
+<span class="cmt"># 集合运算</span>
+<span class="fn">print</span>(<span class="name">a</span> <span class="op">&</span> <span class="name">b</span>)        <span class="cmt"># {4, 5}       交集</span>
+<span class="fn">print</span>(<span class="name">a</span> <span class="op">|</span> <span class="name">b</span>)        <span class="cmt"># {1,2,3,4,5,6,7,8}  并集</span>
+<span class="fn">print</span>(<span class="name">a</span> <span class="op">-</span> <span class="name">b</span>)        <span class="cmt"># {1, 2, 3}    差集</span>
+<span class="fn">print</span>(<span class="name">a</span> <span class="op">^</span> <span class="name">b</span>)        <span class="cmt"># {1,2,3,6,7,8}  对称差集</span>
+
+<span class="cmt"># 去重应用</span>
+<span class="name">nums</span> <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">3</span>, <span class="num">3</span>, <span class="num">4</span>]
+<span class="name">unique</span> <span class="op">=</span> <span class="fn">list</span>(<span class="fn">set</span>(<span class="name">nums</span>))  <span class="cmt"># [1, 2, 3, 4]</span></pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>数据结构对比总结</h3>
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th>特性</th>
+                            <th>列表 List</th>
+                            <th>元组 Tuple</th>
+                            <th>字典 Dict</th>
+                            <th>集合 Set</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>语法</td>
+                            <td><code>[1, 2, 3]</code></td>
+                            <td><code>(1, 2, 3)</code></td>
+                            <td><code>{'a': 1}</code></td>
+                            <td><code>{1, 2, 3}</code></td>
+                        </tr>
+                        <tr>
+                            <td>有序</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅ (3.7+)</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr>
+                            <td>可变</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>可重复</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>键不可重复</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr>
+                            <td>访问方式</td>
+                            <td>索引</td>
+                            <td>索引</td>
+                            <td>键</td>
+                            <td>无索引</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Chapter 3: 函数与模块 ==================== -->
+    <section id="chapter3" class="chapter">
+        <div class="container">
+            <div class="chapter-header">
+                <div class="chapter-number">03</div>
+                <div class="chapter-title">
+                    <h2>函数与模块</h2>
+                    <p>学习如何定义和调用函数，以及如何使用模块组织代码</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>定义函数</h3>
+                <p>函数是可重复使用的代码块，使用 <code>def</code> 关键字定义。良好的函数设计是编写清晰代码的基础。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># 基本函数定义</span>
+<span class="kw">def</span> <span class="fn">greet</span>(<span class="name">name</span>):
+    <span class="str">"""向指定的人打招呼"""</span>  <span class="cmt"># 文档字符串（docstring）</span>
+    <span class="kw">return</span> <span class="str">f"你好，</span><span class="name">{name}</span><span class="str">！欢迎学习 Python。"</span>
+
+<span class="name">message</span> <span class="op">=</span> <span class="fn">greet</span>(<span class="str">"同学"</span>)
+<span class="fn">print</span>(<span class="name">message</span>)
+
+<span class="cmt"># 默认参数</span>
+<span class="kw">def</span> <span class="fn">power</span>(<span class="name">base</span>, <span class="name">exp</span><span class="op">=</span><span class="num">2</span>):
+    <span class="kw">return</span> <span class="name">base</span> <span class="op">**</span> <span class="name">exp</span>
+
+<span class="fn">print</span>(<span class="fn">power</span>(<span class="num">3</span>))      <span class="cmt"># 9   (默认 exp=2)</span>
+<span class="fn">print</span>(<span class="fn">power</span>(<span class="num">2</span>, <span class="num">10</span>))  <span class="cmt"># 1024</span>
+
+<span class="cmt"># 关键字参数</span>
+<span class="kw">def</span> <span class="fn">create_profile</span>(<span class="name">name</span>, <span class="name">age</span>, <span class="name">city</span><span class="op">=</span><span class="str">"广州"</span>):
+    <span class="kw">return</span> <span class="str">f"</span><span class="name">{name}</span><span class="str">, </span><span class="name">{age}</span><span class="str">岁, 来自</span><span class="name">{city}</span><span class="str">"</span>
+
+<span class="fn">print</span>(<span class="fn">create_profile</span>(<span class="name">age</span><span class="op">=</span><span class="num">20</span>, <span class="name">name</span><span class="op">=</span><span class="str">"张三"</span>))</pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>可变参数</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># *args - 接收任意数量的位置参数（元组）</span>
+<span class="kw">def</span> <span class="fn">calculate_sum</span>(<span class="op">*</span><span class="name">args</span>):
+    <span class="str">"""计算任意数量数字的总和"""</span>
+    <span class="kw">return</span> <span class="fn">sum</span>(<span class="name">args</span>)
+
+<span class="fn">print</span>(<span class="fn">calculate_sum</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>))        <span class="cmt"># 6</span>
+<span class="fn">print</span>(<span class="fn">calculate_sum</span>(<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>))  <span class="cmt"># 100</span>
+
+<span class="cmt"># **kwargs - 接收任意数量的关键字参数（字典）</span>
+<span class="kw">def</span> <span class="fn">print_info</span>(<span class="op">**</span><span class="name">kwargs</span>):
+    <span class="kw">for</span> <span class="name">key</span>, <span class="name">value</span> <span class="kw">in</span> <span class="name">kwargs</span>.<span class="fn">items</span>():
+        <span class="fn">print</span>(<span class="str">f"</span><span class="name">{key}</span><span class="str">: </span><span class="name">{value}</span><span class="str">"</span>)
+
+<span class="fn">print_info</span>(<span class="name">name</span><span class="op">=</span><span class="str">"张三"</span>, <span class="name">age</span><span class="op">=</span><span class="num">20</span>, <span class="name">major</span><span class="op">=</span><span class="str">"CS"</span>)</pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>Lambda 表达式</h3>
+                <p>Lambda 是一种创建小型匿名函数的方式，适合简单的单行操作。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># Lambda 表达式</span>
+<span class="name">square</span> <span class="op">=</span> <span class="kw">lambda</span> <span class="name">x</span>: <span class="name">x</span> <span class="op">**</span> <span class="num">2</span>
+<span class="fn">print</span>(<span class="name">square</span>(<span class="num">5</span>))  <span class="cmt"># 25</span>
+
+<span class="cmt"># 配合高阶函数使用</span>
+<span class="name">numbers</span> <span class="op">=</span> [<span class="num">3</span>, <span class="num">1</span>, <span class="num">4</span>, <span class="num">1</span>, <span class="num">5</span>, <span class="num">9</span>, <span class="num">2</span>, <span class="num">6</span>]
+
+<span class="cmt"># map - 对每个元素应用函数</span>
+<span class="name">squared</span> <span class="op">=</span> <span class="fn">list</span>(<span class="fn">map</span>(<span class="kw">lambda</span> <span class="name">x</span>: <span class="name">x</span><span class="op">**</span><span class="num">2</span>, <span class="name">numbers</span>))
+<span class="cmt"># [9, 1, 16, 1, 25, 81, 4, 36]</span>
+
+<span class="cmt"># filter - 过滤满足条件的元素</span>
+<span class="name">evens</span> <span class="op">=</span> <span class="fn">list</span>(<span class="fn">filter</span>(<span class="kw">lambda</span> <span class="name">x</span>: <span class="name">x</span> <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>, <span class="name">numbers</span>))
+<span class="cmt"># [4, 2, 6]</span>
+
+<span class="cmt"># sorted - 自定义排序</span>
+<span class="name">students</span> <span class="op">=</span> [(<span class="str">"张三"</span>, <span class="num">85</span>), (<span class="str">"李四"</span>, <span class="num">92</span>), (<span class="str">"王五"</span>, <span class="num">78</span>)]
+<span class="name">ranked</span> <span class="op">=</span> <span class="fn">sorted</span>(<span class="name">students</span>, <span class="name">key</span><span class="op">=</span><span class="kw">lambda</span> <span class="name">s</span>: <span class="name">s</span>[<span class="num">1</span>], <span class="name">reverse</span><span class="op">=</span><span class="kw">True</span>)
+<span class="cmt"># [('李四', 92), ('张三', 85), ('王五', 78)]</span></pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>模块与包</h3>
+                <p>模块是包含 Python 代码的 <code>.py</code> 文件，包是包含多个模块的文件夹。通过 <code>import</code> 语句来使用它们。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># 导入整个模块</span>
+<span class="kw">import</span> math
+<span class="fn">print</span>(math.<span class="fn">sqrt</span>(<span class="num">16</span>))    <span class="cmt"># 4.0</span>
+<span class="fn">print</span>(math.pi)            <span class="cmt"># 3.141592653589793</span>
+
+<span class="cmt"># 导入特定功能</span>
+<span class="kw">from</span> random <span class="kw">import</span> randint, choice
+<span class="fn">print</span>(<span class="fn">randint</span>(<span class="num">1</span>, <span class="num">100</span>))       <span class="cmt"># 随机整数</span>
+<span class="fn">print</span>(<span class="fn">choice</span>([<span class="str">"A"</span>, <span class="str">"B"</span>, <span class="str">"C"</span>]))  <span class="cmt"># 随机选择</span>
+
+<span class="cmt"># 导入并设置别名</span>
+<span class="kw">import</span> datetime <span class="kw">as</span> dt
+<span class="name">now</span> <span class="op">=</span> dt.datetime.<span class="fn">now</span>()
+<span class="fn">print</span>(<span class="name">now</span>.<span class="fn">strftime</span>(<span class="str">"%Y-%m-%d %H:%M"</span>))
+
+<span class="cmt"># 常用标准库模块</span>
+<span class="cmt"># os       - 操作系统接口</span>
+<span class="cmt"># sys      - 系统相关参数</span>
+<span class="cmt"># json     - JSON 数据处理</span>
+<span class="cmt"># re       - 正则表达式</span>
+<span class="cmt"># collections - 高级数据结构</span></pre></div>
+                </div>
+                <div class="tip-box">
+                    <div class="tip-title">💡 第三方包管理</div>
+                    <p>使用 <code>pip install 包名</code> 安装第三方库。例如：<code>pip install requests</code> 安装 HTTP 请求库，<code>pip install numpy</code> 安装科学计算库。推荐使用虚拟环境（venv）来管理项目依赖。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Chapter 4: 面向对象编程 ==================== -->
+    <section id="chapter4" class="chapter">
+        <div class="container">
+            <div class="chapter-header">
+                <div class="chapter-number">04</div>
+                <div class="chapter-title">
+                    <h2>面向对象编程</h2>
+                    <p>理解类与对象、继承、封装和多态等面向对象编程核心概念</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>类与对象</h3>
+                <p>类（Class）是创建对象的蓝图，对象（Object）是类的实例。类定义了对象的属性（数据）和方法（行为）。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="kw">class</span> <span class="cls">Student</span>:
+    <span class="str">"""学生类"""</span>
+
+    <span class="cmt"># 类变量（所有实例共享）</span>
+    <span class="name">school</span> <span class="op">=</span> <span class="str">"广东科学技术职业学院"</span>
+
+    <span class="cmt"># 构造方法（初始化实例）</span>
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="name">self</span>, <span class="name">name</span>, <span class="name">age</span>, <span class="name">major</span>):
+        <span class="name">self</span>.<span class="name">name</span> <span class="op">=</span> <span class="name">name</span>      <span class="cmt"># 实例属性</span>
+        <span class="name">self</span>.<span class="name">age</span> <span class="op">=</span> <span class="name">age</span>
+        <span class="name">self</span>.<span class="name">major</span> <span class="op">=</span> <span class="name">major</span>
+        <span class="name">self</span>.<span class="name">scores</span> <span class="op">=</span> []
+
+    <span class="cmt"># 实例方法</span>
+    <span class="kw">def</span> <span class="fn">add_score</span>(<span class="name">self</span>, <span class="name">score</span>):
+        <span class="name">self</span>.<span class="name">scores</span>.<span class="fn">append</span>(<span class="name">score</span>)
+
+    <span class="kw">def</span> <span class="fn">average</span>(<span class="name">self</span>):
+        <span class="kw">if</span> <span class="kw">not</span> <span class="name">self</span>.<span class="name">scores</span>:
+            <span class="kw">return</span> <span class="num">0</span>
+        <span class="kw">return</span> <span class="fn">sum</span>(<span class="name">self</span>.<span class="name">scores</span>) <span class="op">/</span> <span class="fn">len</span>(<span class="name">self</span>.<span class="name">scores</span>)
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="name">self</span>):
+        <span class="cmt"># 特殊方法：定义对象的字符串表示</span>
+        <span class="kw">return</span> <span class="str">f"</span><span class="name">{self</span>.<span class="name">name</span><span class="str">（</span><span class="name">{self</span>.<span class="name">major</span><span class="str">），平均分：</span><span class="name">{self</span>.<span class="fn">average</span>():<span class="str">.1f}</span><span class="str">"</span>
+
+<span class="cmt"># 创建对象（实例化）</span>
+<span class="name">s1</span> <span class="op">=</span> <span class="cls">Student</span>(<span class="str">"张三"</span>, <span class="num">20</span>, <span class="str">"计算机科学"</span>)
+<span class="name">s1</span>.<span class="fn">add_score</span>(<span class="num">90</span>)
+<span class="name">s1</span>.<span class="fn">add_score</span>(<span class="num">85</span>)
+<span class="name">s1</span>.<span class="fn">add_score</span>(<span class="num">92</span>)
+<span class="fn">print</span>(<span class="name">s1</span>)  <span class="cmt"># 张三（计算机科学），平均分：89.0</span></pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>继承</h3>
+                <p>继承允许子类复用父类的属性和方法，并可以扩展或重写它们。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># 父类</span>
+<span class="kw">class</span> <span class="cls">Animal</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="name">self</span>, <span class="name">name</span>, <span class="name">sound</span>):
+        <span class="name">self</span>.<span class="name">name</span> <span class="op">=</span> <span class="name">name</span>
+        <span class="name">self</span>.<span class="name">sound</span> <span class="op">=</span> <span class="name">sound</span>
+
+    <span class="kw">def</span> <span class="fn">speak</span>(<span class="name">self</span>):
+        <span class="kw">return</span> <span class="str">f"</span><span class="name">{self</span>.<span class="name">name</span><span class="str">说："</span><span class="name">{self</span>.<span class="name">sound</span><span class="str">}"</span>
+
+<span class="cmt"># 子类继承父类</span>
+<span class="kw">class</span> <span class="cls">Dog</span>(<span class="cls">Animal</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="name">self</span>, <span class="name">name</span>, <span class="name">breed</span>):
+        <span class="kw">super</span>().<span class="fn">__init__</span>(<span class="name">name</span>, <span class="str">"汪汪！"</span>)  <span class="cmt"># 调用父类构造方法</span>
+        <span class="name">self</span>.<span class="name">breed</span> <span class="op">=</span> <span class="name">breed</span>               <span class="cmt"># 子类特有属性</span>
+
+    <span class="kw">def</span> <span class="fn">fetch</span>(<span class="name">self</span>):
+        <span class="kw">return</span> <span class="str">f"</span><span class="name">{self</span>.<span class="name">name</span><span class="str">正在捡球！"</span>
+
+<span class="kw">class</span> <span class="cls">Cat</span>(<span class="cls">Animal</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="name">self</span>, <span class="name">name</span>, <span class="name">color</span>):
+        <span class="kw">super</span>().<span class="fn">__init__</span>(<span class="name">name</span>, <span class="str">"喵~"</span>)
+        <span class="name">self</span>.<span class="name">color</span> <span class="op">=</span> <span class="name">color</span>
+
+<span class="cmt"># 多态 - 同一方法，不同表现</span>
+<span class="name">dog</span> <span class="op">=</span> <span class="cls">Dog</span>(<span class="str">"旺财"</span>, <span class="str">"金毛"</span>)
+<span class="name">cat</span> <span class="op">=</span> <span class="cls">Cat</span>(<span class="str">"咪咪"</span>, <span class="str">"橘色"</span>)
+
+<span class="kw">for</span> <span class="name">animal</span> <span class="kw">in</span> [<span class="name">dog</span>, <span class="name">cat</span>]:
+    <span class="fn">print</span>(<span class="name">animal</span>.<span class="fn">speak</span>())
+<span class="cmt"># 旺财说："汪汪！"</span>
+<span class="cmt"># 咪咪说："喵~"</span></pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>封装</h3>
+                <p>封装通过将属性设为"私有"来保护数据，对外提供公共方法来安全地访问和修改数据。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="kw">class</span> <span class="cls">BankAccount</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="name">self</span>, <span class="name">owner</span>, <span class="name">balance</span><span class="op">=</span><span class="num">0</span>):
+        <span class="name">self</span>.<span class="name">owner</span> <span class="op">=</span> <span class="name">owner</span>
+        <span class="name">self</span>.<span class="name">__balance</span> <span class="op">=</span> <span class="name">balance</span>  <span class="cmt"># 双下划线 = 私有属性</span>
+
+    <span class="kw">def</span> <span class="fn">deposit</span>(<span class="name">self</span>, <span class="name">amount</span>):
+        <span class="kw">if</span> <span class="name">amount</span> <span class="op">></span> <span class="num">0</span>:
+            <span class="name">self</span>.<span class="name">__balance</span> <span class="op">+=</span> <span class="name">amount</span>
+            <span class="fn">print</span>(<span class="str">f"存入 </span><span class="name">{amount}</span><span class="str"> 元，余额 </span><span class="name">{self</span>.<span class="name">__balance</span><span class="str"> 元"</span>)
+        <span class="kw">else</span>:
+            <span class="fn">print</span>(<span class="str">"存款金额必须大于 0"</span>)
+
+    <span class="kw">def</span> <span class="fn">withdraw</span>(<span class="name">self</span>, <span class="name">amount</span>):
+        <span class="kw">if</span> <span class="name">amount</span> <span class="op">></span> <span class="name">self</span>.<span class="name">__balance</span>:
+            <span class="fn">print</span>(<span class="str">"余额不足！"</span>)
+        <span class="kw">else</span>:
+            <span class="name">self</span>.<span class="name">__balance</span> <span class="op">-=</span> <span class="name">amount</span>
+            <span class="fn">print</span>(<span class="str">f"取出 </span><span class="name">{amount}</span><span class="str"> 元，余额 </span><span class="name">{self</span>.<span class="name">__balance</span><span class="str"> 元"</span>)
+
+    <span class="cmt"># 使用 @property 装饰器提供安全的访问</span>
+    <span class="dec">@property</span>
+    <span class="kw">def</span> <span class="fn">balance</span>(<span class="name">self</span>):
+        <span class="kw">return</span> <span class="name">self</span>.<span class="name">__balance</span>
+
+<span class="name">account</span> <span class="op">=</span> <span class="cls">BankAccount</span>(<span class="str">"张三"</span>, <span class="num">1000</span>)
+<span class="name">account</span>.<span class="fn">deposit</span>(<span class="num">500</span>)     <span class="cmt"># 存入 500 元，余额 1500 元</span>
+<span class="name">account</span>.<span class="fn">withdraw</span>(<span class="num">200</span>)   <span class="cmt"># 取出 200 元，余额 1300 元</span>
+<span class="fn">print</span>(<span class="name">account</span>.<span class="name">balance</span>)  <span class="cmt"># 1300（通过 property 访问）</span></pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>特殊方法（魔术方法）</h3>
+                <p>Python 提供许多以双下划线开头和结尾的特殊方法，让自定义类支持内置操作。</p>
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th>方法</th>
+                            <th>触发条件</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>__init__</code></td>
+                            <td>创建对象时</td>
+                            <td>初始化对象</td>
+                        </tr>
+                        <tr>
+                            <td><code>__str__</code></td>
+                            <td><code>print(obj)</code></td>
+                            <td>定义对象的字符串表示</td>
+                        </tr>
+                        <tr>
+                            <td><code>__len__</code></td>
+                            <td><code>len(obj)</code></td>
+                            <td>返回对象长度</td>
+                        </tr>
+                        <tr>
+                            <td><code>__getitem__</code></td>
+                            <td><code>obj[key]</code></td>
+                            <td>索引访问</td>
+                        </tr>
+                        <tr>
+                            <td><code>__add__</code></td>
+                            <td><code>obj1 + obj2</code></td>
+                            <td>定义加法行为</td>
+                        </tr>
+                        <tr>
+                            <td><code>__eq__</code></td>
+                            <td><code>obj1 == obj2</code></td>
+                            <td>定义相等比较</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Chapter 5: 文件操作与异常处理 ==================== -->
+    <section id="chapter5" class="chapter">
+        <div class="container">
+            <div class="chapter-header">
+                <div class="chapter-number">05</div>
+                <div class="chapter-title">
+                    <h2>文件操作与异常处理</h2>
+                    <p>学习如何读写文件以及使用异常处理机制来编写健壮的程序</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>文件读写</h3>
+                <p>Python 使用 <code>open()</code> 函数打开文件，推荐使用 <code>with</code> 语句来自动管理文件的关闭。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># 写入文件</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"hello.txt"</span>, <span class="str">"w"</span>, <span class="name">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="name">f</span>:
+    <span class="name">f</span>.<span class="fn">write</span>(<span class="str">"Hello, Python!\n"</span>)
+    <span class="name">f</span>.<span class="fn">write</span>(<span class="str">"文件操作学习\n"</span>)
+
+<span class="cmt"># 读取文件</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"hello.txt"</span>, <span class="str">"r"</span>, <span class="name">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="name">f</span>:
+    <span class="name">content</span> <span class="op">=</span> <span class="name">f</span>.<span class="fn">read</span>()          <span class="cmt"># 读取全部内容</span>
+    <span class="fn">print</span>(<span class="name">content</span>)
+
+<span class="cmt"># 逐行读取</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"hello.txt"</span>, <span class="str">"r"</span>, <span class="name">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="name">f</span>:
+    <span class="kw">for</span> <span class="name">line</span> <span class="kw">in</span> <span class="name">f</span>:
+        <span class="fn">print</span>(<span class="name">line</span>.<span class="fn">strip</span>())  <span class="cmt"># strip() 去除换行符</span>
+
+<span class="cmt"># 追加内容</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"hello.txt"</span>, <span class="str">"a"</span>, <span class="name">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="name">f</span>:
+    <span class="name">f</span>.<span class="fn">write</span>(<span class="str">"追加的新内容\n"</span>)</pre></div>
+                </div>
+                <div class="tip-box">
+                    <div class="tip-title">💡 文件打开模式</div>
+                    <p><code>"r"</code> = 只读（默认），<code>"w"</code> = 写入（覆盖），<code>"a"</code> = 追加，<code>"b"</code> = 二进制模式（如 <code>"rb"</code>、<code>"wb"</code>），<code>"+"</code> = 读写模式（如 <code>"r+"</code>）。始终建议指定 <code>encoding="utf-8"</code>。</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>异常处理</h3>
+                <p>异常处理让程序在遇到错误时不会直接崩溃，而是可以优雅地处理错误并继续运行。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># 基本异常处理</span>
+<span class="kw">try</span>:
+    <span class="name">num</span> <span class="op">=</span> <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"请输入一个数字："</span>))
+    <span class="name">result</span> <span class="op">=</span> <span class="num">100</span> <span class="op">/</span> <span class="name">num</span>
+    <span class="fn">print</span>(<span class="str">f"结果是：</span><span class="name">{result}</span><span class="str">"</span>)
+<span class="kw">except</span> <span class="cls">ValueError</span>:
+    <span class="fn">print</span>(<span class="str">"错误：请输入有效的数字！"</span>)
+<span class="kw">except</span> <span class="cls">ZeroDivisionError</span>:
+    <span class="fn">print</span>(<span class="str">"错误：不能除以零！"</span>)
+<span class="kw">except</span> <span class="cls">Exception</span> <span class="kw">as</span> <span class="name">e</span>:
+    <span class="fn">print</span>(<span class="str">f"未知错误：</span><span class="name">{e}</span><span class="str">"</span>)
+<span class="kw">else</span>:
+    <span class="cmt"># 没有异常时执行</span>
+    <span class="fn">print</span>(<span class="str">"计算成功！"</span>)
+<span class="kw">finally</span>:
+    <span class="cmt"># 无论是否异常都会执行</span>
+    <span class="fn">print</span>(<span class="str">"程序结束。"</span>)</pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>常见异常类型</h3>
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th>异常类型</th>
+                            <th>触发场景</th>
+                            <th>示例</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>ValueError</code></td>
+                            <td>值类型正确但值不合法</td>
+                            <td><code>int("abc")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>TypeError</code></td>
+                            <td>操作类型不匹配</td>
+                            <td><code>"a" + 1</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>IndexError</code></td>
+                            <td>索引超出范围</td>
+                            <td><code>[1,2][5]</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>KeyError</code></td>
+                            <td>字典中不存在该键</td>
+                            <td><code>d["x"]</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>FileNotFoundError</code></td>
+                            <td>文件不存在</td>
+                            <td><code>open("no.txt")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>ZeroDivisionError</code></td>
+                            <td>除以零</td>
+                            <td><code>1/0</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-block">
+                <h3>自定义异常与综合实战</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="cmt"># 自定义异常类</span>
+<span class="kw">class</span> <span class="cls">ScoreError</span>(<span class="cls">Exception</span>):
+    <span class="str">"""分数异常"""</span>
+    <span class="kw">pass</span>
+
+<span class="kw">def</span> <span class="fn">validate_score</span>(<span class="name">score</span>):
+    <span class="kw">if</span> <span class="kw">not</span> <span class="fn">isinstance</span>(<span class="name">score</span>, (<span class="cls">int</span>, <span class="cls">float</span>)):
+        <span class="kw">raise</span> <span class="cls">TypeError</span>(<span class="str">"分数必须是数字"</span>)
+    <span class="kw">if</span> <span class="name">score</span> <span class="op"><</span> <span class="num">0</span> <span class="kw">or</span> <span class="name">score</span> <span class="op">></span> <span class="num">100</span>:
+        <span class="kw">raise</span> <span class="cls">ScoreError</span>(<span class="str">f"分数 </span><span class="name">{score}</span><span class="str"> 不在 0-100 范围内"</span>)
+    <span class="kw">return</span> <span class="kw">True</span>
+
+<span class="cmt"># 综合实战：读取成绩文件并统计</span>
+<span class="kw">def</span> <span class="fn">process_scores</span>(<span class="name">filepath</span>):
+    <span class="name">scores</span> <span class="op">=</span> []
+    <span class="kw">try</span>:
+        <span class="kw">with</span> <span class="fn">open</span>(<span class="name">filepath</span>, <span class="str">"r"</span>, <span class="name">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="name">f</span>:
+            <span class="kw">for</span> <span class="name">line</span> <span class="kw">in</span> <span class="name">f</span>:
+                <span class="name">score</span> <span class="op">=</span> <span class="fn">int</span>(<span class="name">line</span>.<span class="fn">strip</span>())
+                <span class="fn">validate_score</span>(<span class="name">score</span>)
+                <span class="name">scores</span>.<span class="fn">append</span>(<span class="name">score</span>)
+    <span class="kw">except</span> <span class="cls">FileNotFoundError</span>:
+        <span class="fn">print</span>(<span class="str">f"文件 </span><span class="name">{filepath}</span><span class="str"> 不存在"</span>)
+    <span class="kw">except</span> (<span class="cls">ValueError</span>, <span class="cls">ScoreError</span>) <span class="kw">as</span> <span class="name">e</span>:
+        <span class="fn">print</span>(<span class="str">f"数据格式错误：</span><span class="name">{e}</span><span class="str">"</span>)
+    <span class="kw">else</span>:
+        <span class="fn">print</span>(<span class="str">f"平均分：</span><span class="name">{</span><span class="fn">sum</span>(<span class="name">scores</span>)<span class="op">/</span><span class="fn">len</span>(<span class="name">scores</span>)<span class="name">:</span><span class="str">.1f}</span><span class="str">"</span>)
+        <span class="fn">print</span>(<span class="str">f"最高分：</span><span class="name">{</span><span class="fn">max</span>(<span class="name">scores</span>)<span class="name">}</span><span class="str">"</span>)
+        <span class="fn">print</span>(<span class="str">f"最低分：</span><span class="name">{</span><span class="fn">min</span>(<span class="name">scores</span>)<span class="name">}</span><span class="str">"</span>)</pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>JSON 文件操作</h3>
+                <p>JSON 是最常用的数据交换格式，Python 标准库提供了 <code>json</code> 模块来处理 JSON 数据。</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                        <span class="code-lang">Python</span>
+                    </div>
+                    <div class="code-body"><pre><span class="kw">import</span> json
+
+<span class="cmt"># Python 字典 → JSON 文件</span>
+<span class="name">data</span> <span class="op">=</span> {
+    <span class="str">"name"</span>: <span class="str">"张三"</span>,
+    <span class="str">"age"</span>: <span class="num">20</span>,
+    <span class="str">"courses</span>": [<span class="str">"Python"</span>, <span class="str">"数据结构"</span>, <span class="str">"数据库"</span>]
+}
+
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"student.json"</span>, <span class="str">"w"</span>, <span class="name">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="name">f</span>:
+    json.<span class="fn">dump</span>(<span class="name">data</span>, <span class="name">f</span>, <span class="name">ensure_ascii</span><span class="op">=</span><span class="kw">False</span>, <span class="name">indent</span><span class="op">=</span><span class="num">2</span>)
+
+<span class="cmt"># JSON 文件 → Python 字典</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"student.json"</span>, <span class="str">"r"</span>, <span class="name">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="name">f</span>:
+    <span class="name">loaded</span> <span class="op">=</span> json.<span class="fn">load</span>(<span class="name">f</span>)
+    <span class="fn">print</span>(<span class="name">loaded</span>[<span class="str">"name"</span>])      <span class="cmt"># '张三'</span>
+    <span class="fn">print</span>(<span class="name">loaded</span>[<span class="str">"courses"</span>])  <span class="cmt"># ['Python', '数据结构', '数据库']</span></pre></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <div class="tip-box">
+                    <div class="tip-title">🎉 恭喜你完成了 Python 基础课程！</div>
+                    <p>你已经掌握了 Python 编程的核心基础知识：基础语法、数据结构、函数与模块、面向对象编程、文件操作与异常处理。接下来，建议通过实际项目来巩固所学知识，例如开发一个待办事项应用、一个简单的计算器或一个学生成绩管理系统。持续练习是成为优秀程序员的关键！</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>🐍 Python 基础课程 — 持续学习，不断进步</p>
+            <a href="index.html" class="back-link">← 返回首页</a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Highlight active nav link on scroll
+        const chapters = document.querySelectorAll('.chapter[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            chapters.forEach(chapter => {
+                const sectionTop = chapter.offsetTop - 120;
+                if (window.pageYOffset >= sectionTop) {
+                    current = chapter.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
