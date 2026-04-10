@@ -455,6 +455,94 @@
             }
         }
 
+        /* Navigation */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+            transition: var(--transition);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .nav-logo {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--white);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .nav-menu a.active {
+            color: var(--white);
+            background: var(--accent);
+        }
+
+        .nav-menu a .nav-icon {
+            margin-right: 5px;
+            font-size: 0.95rem;
+        }
+
+        /* Mobile hamburger */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            background: none;
+            border: none;
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header-content h1 {
@@ -463,6 +551,33 @@
 
             .header-content p {
                 font-size: 1.2rem;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: rgba(44, 62, 80, 0.98);
+                flex-direction: column;
+                padding: 15px 20px;
+                gap: 5px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            }
+
+            .nav-menu.open {
+                display: flex;
+            }
+
+            .nav-menu a {
+                padding: 12px 18px;
+                border-radius: 10px;
+                width: 100%;
             }
 
             .about-content {
@@ -507,6 +622,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">🏠 我的主页</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#about" class="active"><span class="nav-icon">👤</span>关于我</a></li>
+                <li><a href="#hobbies"><span class="nav-icon">🎯</span>兴趣爱好</a></li>
+                <li><a href="#personality"><span class="nav-icon">💡</span>性格特点</a></li>
+                <li><a href="#course"><span class="nav-icon">📚</span>学习资源</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="菜单">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
     <!-- Header -->
     <header>
         <div class="container header-content">
@@ -537,7 +668,7 @@
     </section>
 
     <!-- Hobbies Section -->
-    <section class="hobbies">
+    <section id="hobbies" class="hobbies">
         <div class="container">
             <div class="section-title">
                 <h2>兴趣爱好</h2>
@@ -558,7 +689,7 @@
     </section>
 
     <!-- Personality Section -->
-    <section class="personality">
+    <section id="personality" class="personality">
         <div class="container">
             <div class="section-title">
                 <h2>性格特点</h2>
@@ -580,7 +711,7 @@
     </section>
 
     <!-- Course Section -->
-    <section class="course-section">
+    <section id="course" class="course-section">
         <div class="container">
             <div class="section-title">
                 <h2>学习资源</h2>
@@ -617,18 +748,43 @@
     </footer>
 
     <script>
-        // Smooth scrolling for anchor links
+        // Smooth scrolling with nav offset
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(href);
+                if (target) {
+                    const offset = 70;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+                // Close mobile menu
+                document.getElementById('navMenu').classList.remove('open');
             });
         });
 
-        // Add scroll animation
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
         window.addEventListener('scroll', function() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Scroll animation for cards
             const elements = document.querySelectorAll('.hobby-card, .trait-card');
             elements.forEach(element => {
                 const position = element.getBoundingClientRect();
@@ -637,6 +793,11 @@
                     element.style.transform = 'translateY(0)';
                 }
             });
+        });
+
+        // Mobile menu toggle
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('open');
         });
     </script>
 </body>
