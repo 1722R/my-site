@@ -505,6 +505,196 @@
         ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }
 
+        /* ===== Sub Section (h4 level) ===== */
+        .sub-section {
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: #666;
+            margin: 28px 0 12px 0;
+            padding-left: 12px;
+            border-left: 3px solid #b0bec5;
+            line-height: 1.5;
+        }
+
+        /* ===== Knowledge Card ===== */
+        .knowledge-card {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 4px solid #1976d2;
+            padding: 18px 22px;
+            border-radius: 0 12px 12px 0;
+            margin: 18px 0;
+            position: relative;
+        }
+
+        .knowledge-card::before {
+            content: '💡';
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            font-size: 1.4rem;
+            opacity: 0.6;
+        }
+
+        .knowledge-card .tip-title {
+            font-weight: 600;
+            color: #0d47a1;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        .knowledge-card p {
+            color: #1565c0;
+            line-height: 1.7;
+            font-size: 0.92rem;
+            margin: 0;
+        }
+
+        /* ===== Exercise Box ===== */
+        .exercise-box {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-left: 4px solid #8e24aa;
+            padding: 20px 24px;
+            border-radius: 0 12px 12px 0;
+            margin: 22px 0;
+        }
+
+        .exercise-box .tip-title {
+            font-weight: 700;
+            color: #6a1b9a;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .exercise-box ol {
+            padding-left: 22px;
+            margin: 0;
+        }
+
+        .exercise-box ol li {
+            color: #4a148c;
+            line-height: 2;
+            font-size: 0.93rem;
+        }
+
+        .exercise-box ol li::marker {
+            color: #8e24aa;
+            font-weight: 700;
+        }
+
+        .exercise-box code {
+            background: rgba(0,0,0,0.06);
+            color: #6a1b9a;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+
+        /* ===== Output Block ===== */
+        .output-block {
+            background: #0d1117;
+            color: #58a6ff;
+            padding: 14px 20px;
+            border-radius: 10px;
+            margin: 14px 0;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            border: 1px solid #21262d;
+            position: relative;
+        }
+
+        .output-block::before {
+            content: '$ python';
+            display: block;
+            color: #8b949e;
+            margin-bottom: 8px;
+            font-size: 0.78rem;
+        }
+
+        /* ===== Warning Box ===== */
+        .warning-box {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-left: 4px solid #e53935;
+            padding: 16px 22px;
+            border-radius: 0 12px 12px 0;
+            margin: 18px 0;
+        }
+
+        .warning-box .tip-title {
+            font-weight: 600;
+            color: #c62828;
+            margin-bottom: 6px;
+            font-size: 0.92rem;
+        }
+
+        .warning-box p {
+            color: #b71c1c;
+            line-height: 1.7;
+            font-size: 0.92rem;
+            margin: 0;
+        }
+
+        /* ===== Step List ===== */
+        .step-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 14px 0;
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 42px;
+            margin-bottom: 12px;
+            color: #555;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--accent), #d35400);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        /* ===== Key Point ===== */
+        .key-point {
+            display: inline-block;
+            background: linear-gradient(135deg, #fff9c4 0%, #fff176 100%);
+            color: #e65100;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-size: 0.92rem;
+        }
+
+        /* ===== Inline code (global) ===== */
+        .content-block code,
+        .knowledge-card code,
+        .warning-box code,
+        .tip-box code,
+        .ai-tip code {
+            background: var(--code-bg);
+            color: var(--code-string);
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .sidebar { transform: translateX(-100%); }
@@ -639,7 +829,7 @@
                 </div>
             </section>
 
-            <!-- ==================== Chapter 1 ==================== -->
+                        <!-- ==================== Chapter 1 ==================== -->
             <section id="chapter1" class="chapter">
                 <div class="chapter-header">
                     <div class="chapter-number">01</div>
@@ -649,188 +839,1052 @@
                     </div>
                 </div>
 
+                <!-- ========== 1.1 基础语法与数据结构 ========== -->
                 <div class="content-block" id="ch1-syntax">
-                    <h3>基础语法与数据结构</h3>
-                    <p>掌握变量、数据类型（整数、字符串、布尔值等）、运算符和输入输出。重点理解<strong>列表（List）</strong>和<strong>字典（Dictionary）</strong>这两种核心容器——列表用于存储有序序列（如训练损失历史），字典用于存储键值对配置（如模型超参数）。</p>
+                    <h3>1.1 基础语法与数据结构</h3>
+
+                    <!-- 什么是变量 -->
+                    <div class="sub-section">什么是变量？</div>
+                    <p>想象你有一排收纳盒，每个盒子上都贴着一张标签。标签上写着盒子里装的是什么 —— 比如"学习率"、"模型名称"、"训练轮数"。在 Python 中，<span class="key-point">变量就是标签，它指向内存中存储的数据</span>。</p>
+                    <p>你不需要提前声明盒子的类型（不像 Java 或 C++），Python 会自动判断。这叫做<strong>动态类型</strong>。</p>
+
                     <div class="code-block">
                         <div class="code-header">
                             <div class="code-dots"><span></span><span></span><span></span></div>
                             <span class="code-lang">Python</span>
                         </div>
-                        <div class="code-body"><pre><span class="cmt"># 变量与基本数据类型</span>
-<span class="name">name</span> <span class="op">=</span> <span class="str">"张三"</span>          <span class="cmt"># 字符串</span>
-<span class="name">age</span> <span class="op">=</span> <span class="num">20</span>               <span class="cmt"># 整数</span>
-<span class="name">lr</span> <span class="op">=</span> <span class="num">0.001</span>            <span class="cmt"># 浮点数（学习率）</span>
-<span class="name">is_training</span> <span class="op">=</span> <span class="kw">True</span>    <span class="cmt"># 布尔值</span>
+                        <div class="code-body"><pre><span class="cmt"># 变量就像给数据贴标签</span>
+<span class="name">model_name</span> <span class="op">=</span> <span class="str">"ResNet50"</span>     <span class="cmt"># 标签 model_name 指向字符串 "ResNet50"</span>
+<span class="name">learning_rate</span> <span class="op">=</span> <span class="num">0.001</span>       <span class="cmt"># 标签 learning_rate 指向浮点数 0.001</span>
+<span class="name">num_layers</span> <span class="op">=</span> <span class="num">50</span>              <span class="cmt"># 标签 num_layers 指向整数 50</span>
+<span class="name">is_training</span> <span class="op">=</span> <span class="kw">True</span>          <span class="cmt"># 标签 is_training 指向布尔值 True</span>
 
-<span class="cmt"># ★ 列表 List — 存储有序序列</span>
-<span class="name">loss_history</span> <span class="op">=</span> [<span class="num">0.9</span>, <span class="num">0.7</span>, <span class="num">0.5</span>, <span class="num">0.3</span>, <span class="num">0.15</span>]  <span class="cmt"># 训练损失历史</span>
-<span class="name">loss_history</span>.<span class="fn">append</span>(<span class="num">0.08</span>)                    <span class="cmt"># 添加新数据</span>
-<span class="fn">print</span>(<span class="str">f"最终损失: </span><span class="name">{loss_history</span>[<span class="op">-</span><span class="num">1</span>]<span class="str">"</span>)               <span class="cmt"># 索引访问</span>
+<span class="cmt"># 变量可以被重新赋值（标签贴到新的盒子上）</span>
+<span class="name">learning_rate</span> <span class="op">=</span> <span class="num">0.0005</span>       <span class="cmt"># 学习率从 0.001 改为 0.0005</span>
+<span class="fn">print</span>(<span class="name">learning_rate</span>)             <span class="cmt"># 输出: 0.0005</span></pre></div>
+                    </div>
 
-<span class="cmt"># 列表推导式</span>
-<span class="name">squares</span> <span class="op">=</span> [<span class="name">x</span><span class="op">**</span><span class="num">2</span> <span class="kw">for</span> <span class="name">x</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">6</span>)]   <span class="cmt"># [0, 1, 4, 9, 16, 25]</span>
+                    <div class="knowledge-card">
+                        <div class="tip-title">概念解释：动态类型 vs 静态类型</div>
+                        <p>Python 是动态类型语言，你写 <code>x = 10</code> 时不需要告诉 Python "x 是一个整数"，它会自动推断。而 Java 等静态类型语言需要写 <code>int x = 10;</code>。动态类型让代码更简洁，这也是 AI 更喜欢生成 Python 代码的原因之一。</p>
+                    </div>
 
-<span class="cmt"># ★ 字典 Dictionary — 存储键值对配置</span>
+                    <!-- 四种基本数据类型 -->
+                    <div class="sub-section">Python 的四种基本数据类型</div>
+                    <p>Python 中有四种最常用的基本数据类型，就像生活中有不同种类的容器来装不同类型的物品。</p>
+
+                    <table class="content-table">
+                        <thead>
+                            <tr><th>数据类型</th><th>关键字</th><th>说明</th><th>AI 场景示例</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>整数</td><td><code>int</code></td><td>没有小数点的数字</td><td><code>epochs = 100</code>（训练轮数）</td></tr>
+                            <tr><td>浮点数</td><td><code>float</code></td><td>带小数点的数字</td><td><code>lr = 0.001</code>（学习率）</td></tr>
+                            <tr><td>字符串</td><td><code>str</code></td><td>文本，用引号包裹</td><td><code>optimizer = "adam"</code>（优化器名称）</td></tr>
+                            <tr><td>布尔值</td><td><code>bool</code></td><td>只有 True 或 False</td><td><code>use_gpu = True</code>（是否使用GPU）</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== 四种基本数据类型 =====</span>
+
+<span class="cmt"># 1. 整数 int — 用于计数、索引</span>
+<span class="name">batch_size</span> <span class="op">=</span> <span class="num">32</span>           <span class="cmt"># 每批训练 32 个样本</span>
+<span class="name">num_classes</span> <span class="op">=</span> <span class="num">10</span>          <span class="cmt"># 分类任务的类别数</span>
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="name">batch_size</span>))    <span class="cmt"># &lt;class 'int'&gt;</span>
+
+<span class="cmt"># 2. 浮点数 float — 用于精度、比率</span>
+<span class="name">learning_rate</span> <span class="op">=</span> <span class="num">0.001</span>     <span class="cmt"># 学习率，需要精确的小数</span>
+<span class="name">accuracy</span> <span class="op">=</span> <span class="num">0.9567</span>         <span class="cmt"># 模型准确率 95.67%</span>
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="name">learning_rate</span>)) <span class="cmt"># &lt;class 'float'&gt;</span>
+
+<span class="cmt"># 3. 字符串 str — 用于名称、路径、标签</span>
+<span class="name">model_name</span> <span class="op">=</span> <span class="str">"BERT"</span>       <span class="cmt"># 模型名称</span>
+<span class="name">data_path</span> <span class="op">=</span> <span class="str">"./dataset/"</span>  <span class="cmt"># 数据集路径</span>
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="name">model_name</span>))    <span class="cmt"># &lt;class 'str'&gt;</span>
+
+<span class="cmt"># 4. 布尔值 bool — 用于开关、判断</span>
+<span class="name">use_gpu</span> <span class="op">=</span> <span class="kw">True</span>             <span class="cmt"># 是否使用 GPU 加速</span>
+<span class="name">is_debug</span> <span class="op">=</span> <span class="kw">False</span>            <span class="cmt"># 是否开启调试模式</span>
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="name">use_gpu</span>))         <span class="cmt"># &lt;class 'bool'&gt;</span>
+
+<span class="cmt"># 类型转换（AI 代码中常见）</span>
+<span class="name">loss_str</span> <span class="op">=</span> <span class="str">"0.85"</span>           <span class="cmt"># 从日志中读取的字符串</span>
+<span class="name">loss_val</span> <span class="op">=</span> <span class="fn">float</span>(<span class="name">loss_str</span>)    <span class="cmt"># 转换为浮点数 0.85</span>
+<span class="name">epoch_str</span> <span class="op">=</span> <span class="str">"10"</span>            <span class="cmt"># 字符串 "10"</span>
+<span class="name">epoch_int</span> <span class="op">=</span> <span class="fn">int</span>(<span class="name">epoch_str</span>)     <span class="cmt"># 转换为整数 10</span></pre></div>
+                    </div>
+
+                    <!-- 运算符 -->
+                    <div class="sub-section">运算符</div>
+                    <p>运算符是对数据进行操作的符号。Python 提供了三大类运算符，在 AI 代码中几乎无处不在。</p>
+
+                    <table class="content-table">
+                        <thead>
+                            <tr><th>类别</th><th>运算符</th><th>说明</th><th>AI 场景示例</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>算术运算符</td><td><code>+  -  *  /  //  %  **</code></td><td>数学计算</td><td><code>total_loss = loss1 + loss2</code></td></tr>
+                            <tr><td>比较运算符</td><td><code>==  !=  &gt;  &lt;  &gt;=  &lt;=</code></td><td>比较大小，返回布尔值</td><td><code>if accuracy &gt;= 0.9:</code></td></tr>
+                            <tr><td>逻辑运算符</td><td><code>and  or  not</code></td><td>组合条件判断</td><td><code>if loss &lt; 0.1 and acc &gt; 0.95:</code></td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== 算术运算符 =====</span>
+<span class="name">a</span>, <span class="name">b</span> <span class="op">=</span> <span class="num">10</span>, <span class="num">3</span>
+<span class="fn">print</span>(<span class="name">a</span> <span class="op">+</span> <span class="name">b</span>)    <span class="cmt"># 13   加法</span>
+<span class="fn">print</span>(<span class="name">a</span> <span class="op">-</span> <span class="name">b</span>)    <span class="cmt"># 7    减法</span>
+<span class="fn">print</span>(<span class="name">a</span> <span class="op">*</span> <span class="name">b</span>)    <span class="cmt"># 30   乘法</span>
+<span class="fn">print</span>(<span class="name">a</span> <span class="op">/</span> <span class="name">b</span>)    <span class="cmt"># 3.33 除法（结果为浮点数）</span>
+<span class="fn">print</span>(<span class="name">a</span> <span class="op">//</span> <span class="name">b</span>)   <span class="cmt"># 3    整除（只保留整数部分）</span>
+<span class="fn">print</span>(<span class="name">a</span> <span class="op">%</span> <span class="name">b</span>)    <span class="cmt"># 1    取余（10 除以 3 余 1）</span>
+<span class="fn">print</span>(<span class="name">a</span> <span class="op">**</span> <span class="name">b</span>)   <span class="cmt"># 1000 幂运算（10 的 3 次方）</span>
+
+<span class="cmt"># ===== 比较运算符 =====</span>
+<span class="name">accuracy</span> <span class="op">=</span> <span class="num">0.92</span>
+<span class="fn">print</span>(<span class="name">accuracy</span> <span class="op">==</span> <span class="num">0.92</span>)   <span class="cmt"># True  等于</span>
+<span class="fn">print</span>(<span class="name">accuracy</span> <span class="op">!=</span> <span class="num">1.0</span>)    <span class="cmt"># True  不等于</span>
+<span class="fn">print</span>(<span class="name">accuracy</span> <span class="op">&gt;=</span> <span class="num">0.9</span>)    <span class="cmt"># True  大于等于</span>
+<span class="fn">print</span>(<span class="name">accuracy</span> <span class="op">&lt;</span> <span class="num">0.8</span>)     <span class="cmt"># False 小于</span>
+
+<span class="cmt"># ===== 逻辑运算符 =====</span>
+<span class="name">loss</span> <span class="op">=</span> <span class="num">0.08</span>
+<span class="name">acc</span> <span class="op">=</span> <span class="num">0.96</span>
+<span class="fn">print</span>(<span class="name">loss</span> <span class="op">&lt;</span> <span class="num">0.1</span> <span class="kw">and</span> <span class="name">acc</span> <span class="op">&gt;</span> <span class="num">0.9</span>)   <span class="cmt"># True  两个条件都满足</span>
+<span class="fn">print</span>(<span class="name">loss</span> <span class="op">&lt;</span> <span class="num">0.01</span> <span class="kw">or</span> <span class="name">acc</span> <span class="op">&gt;</span> <span class="num">0.9</span>)    <span class="cmt"># True  至少一个满足</span>
+<span class="fn">print</span>(<span class="kw">not</span> <span class="name">loss</span> <span class="op">&lt;</span> <span class="num">0.01</span>)              <span class="cmt"># True  取反</span></pre></div>
+                    </div>
+
+                    <!-- 输入输出 -->
+                    <div class="sub-section">输入与输出：print() 和 input()</div>
+                    <p><code>print()</code> 用于将信息输出到屏幕，<code>input()</code> 用于从键盘获取用户输入。在 AI 开发中，<code>print()</code> 是调试和监控训练过程的重要工具。</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== print() 输出 =====</span>
+
+<span class="cmt"># 基本输出</span>
+<span class="fn">print</span>(<span class="str">"模型训练开始..."</span>)
+
+<span class="cmt"># f-string 格式化输出（推荐！AI 代码中最常用）</span>
+<span class="name">epoch</span> <span class="op">=</span> <span class="num">5</span>
+<span class="name">loss</span> <span class="op">=</span> <span class="num">0.234</span>
+<span class="name">acc</span> <span class="op">=</span> <span class="num">0.912</span>
+<span class="fn">print</span>(<span class="str">f"Epoch </span><span class="name">{epoch}</span><span class="str">: loss=</span><span class="name">{loss:.4f}</span><span class="str">, acc=</span><span class="name">{acc:.2%}</span><span class="str">"</span>)
+<span class="cmt"># 输出: Epoch 5: loss=0.2340, acc=91.20%</span>
+
+<span class="cmt"># 多个变量输出</span>
+<span class="fn">print</span>(<span class="str">"Loss:"</span>, <span class="name">loss</span>, <span class="str">"Accuracy:"</span>, <span class="name">acc</span>)
+
+<span class="cmt"># ===== input() 输入 =====</span>
+<span class="name">model_name</span> <span class="op">=</span> <span class="fn">input</span>(<span class="str">"请输入模型名称: "</span>)
+<span class="fn">print</span>(<span class="str">f"你选择的模型是: </span><span class="name">{model_name}</span><span class="str">"</span>)
+
+<span class="cmt"># 注意：input() 返回的永远是字符串，需要手动转换</span>
+<span class="name">epochs_input</span> <span class="op">=</span> <span class="fn">input</span>(<span class="str">"请输入训练轮数: "</span>)
+<span class="name">epochs</span> <span class="op">=</span> <span class="fn">int</span>(<span class="name">epochs_input</span>)  <span class="cmt"># 转换为整数</span>
+<span class="fn">print</span>(<span class="str">f"将训练 </span><span class="name">{epochs}</span><span class="str"> 轮"</span>)</pre></div>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-title">学习技巧：f-string 格式化</div>
+                        <p>在字符串前加 <code>f</code>，就可以在 <code>{}</code> 中直接嵌入变量。<code>{loss:.4f}</code> 表示保留4位小数，<code>{acc:.2%}</code> 表示显示为百分比并保留2位小数。这是 Python 3.6+ 的语法，AI 生成的代码几乎都使用这种格式。</p>
+                    </div>
+
+                    <!-- 列表详解 -->
+                    <div class="sub-section">列表（List）详解</div>
+                    <p>列表是 Python 中最常用的数据结构之一。你可以把它想象成一个<strong>有序的收纳架</strong>，每个格子上都有编号（从0开始），你可以往里面放东西、取东西、修改东西。</p>
+
+                    <div class="knowledge-card">
+                        <div class="tip-title">概念解释：什么是列表？</div>
+                        <p>列表是一个<strong>有序的、可修改的</strong>元素集合。用方括号 <code>[]</code> 创建。列表中的元素可以是任何类型，甚至可以是不同类型的混合。在 AI 开发中，列表常用于存储训练过程中的损失值、准确率等历史记录。</p>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — 列表基础</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== 创建列表 =====</span>
+<span class="name">loss_history</span> <span class="op">=</span> [<span class="num">0.9</span>, <span class="num">0.7</span>, <span class="num">0.5</span>, <span class="num">0.3</span>, <span class="num">0.15</span>]  <span class="cmt"># 存储每轮训练的损失值</span>
+<span class="name">model_names</span> <span class="op">=</span> [<span class="str">"ResNet"</span>, <span class="str">"BERT"</span>, <span class="str">"GPT"</span>]     <span class="cmt"># 模型名称列表</span>
+<span class="name">empty_list</span> <span class="op">=</span> []                            <span class="cmt"># 空列表</span>
+
+<span class="cmt"># ===== 索引访问（从 0 开始！）=====</span>
+<span class="fn">print</span>(<span class="name">loss_history</span>[<span class="num">0</span>])    <span class="cmt"># 0.9   第一个元素</span>
+<span class="fn">print</span>(<span class="name">loss_history</span>[<span class="op">-</span><span class="num">1</span>])   <span class="cmt"># 0.15  最后一个元素（-1表示倒数第一）</span>
+<span class="fn">print</span>(<span class="name">loss_history</span>[<span class="op">-</span><span class="num">2</span>])   <span class="cmt"># 0.3   倒数第二个</span>
+
+<span class="cmt"># ===== 切片（获取一段连续的元素）=====</span>
+<span class="fn">print</span>(<span class="name">loss_history</span>[<span class="num">1</span>:<span class="num">4</span>])  <span class="cmt"># [0.7, 0.5, 0.3]  索引1到3（不含4）</span>
+<span class="fn">print</span>(<span class="name">loss_history</span>[:<span class="num">3</span>])   <span class="cmt"># [0.9, 0.7, 0.5]  从开头到索引2</span>
+<span class="fn">print</span>(<span class="name">loss_history</span>[<span class="num">2</span>:])   <span class="cmt"># [0.5, 0.3, 0.15] 从索引2到末尾</span>
+
+<span class="cmt"># ===== 修改元素 =====</span>
+<span class="name">loss_history</span>[<span class="num">0</span>] <span class="op">=</span> <span class="num">0.95</span>   <span class="cmt"># 把第一个值从 0.9 改为 0.95</span>
+
+<span class="cmt"># ===== 列表长度 =====</span>
+<span class="fn">print</span>(<span class="fn">len</span>(<span class="name">loss_history</span>))  <span class="cmt"># 5  列表中有5个元素</span></pre></div>
+                    </div>
+
+                    <div class="sub-section">列表常用方法</div>
+                    <p>列表自带了很多实用的"工具"（方法），可以方便地增删改查。</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — 列表方法</span>
+                        </div>
+                        <div class="code-body"><pre><span class="name">losses</span> <span class="op">=</span> [<span class="num">0.8</span>, <span class="num">0.6</span>, <span class="num">0.4</span>, <span class="num">0.9</span>, <span class="num">0.3</span>]
+
+<span class="cmt"># append() — 在末尾添加一个元素</span>
+<span class="name">losses</span>.<span class="fn">append</span>(<span class="num">0.2</span>)          <span class="cmt"># [0.8, 0.6, 0.4, 0.9, 0.3, 0.2]</span>
+
+<span class="cmt"># insert() — 在指定位置插入元素</span>
+<span class="name">losses</span>.<span class="fn">insert</span>(<span class="num">0</span>, <span class="num">1.0</span>)         <span class="cmt"># 在索引0处插入1.0</span>
+<span class="cmt"># [1.0, 0.8, 0.6, 0.4, 0.9, 0.3, 0.2]</span>
+
+<span class="cmt"># remove() — 删除第一个匹配的值</span>
+<span class="name">losses</span>.<span class="fn">remove</span>(<span class="num">0.9</span>)           <span class="cmt"># 删除值为0.9的元素</span>
+
+<span class="cmt"># pop() — 弹出指定位置的元素（默认最后一个）</span>
+<span class="name">last_loss</span> <span class="op">=</span> <span class="name">losses</span>.<span class="fn">pop</span>()     <span class="cmt"># 弹出并返回最后一个元素 0.2</span>
+<span class="name">first_loss</span> <span class="op">=</span> <span class="name">losses</span>.<span class="fn">pop</span>(<span class="num">0</span>)    <span class="cmt"># 弹出并返回第一个元素 1.0</span>
+
+<span class="cmt"># sort() — 排序（默认升序）</span>
+<span class="name">losses</span>.<span class="fn">sort</span>()                 <span class="cmt"># [0.3, 0.4, 0.6, 0.8]</span>
+<span class="name">losses</span>.<span class="fn">sort</span>(<span class="name">reverse</span><span class="op">=</span><span class="kw">True</span>)    <span class="cmt"># [0.8, 0.6, 0.4, 0.3] 降序</span>
+
+<span class="cmt"># len() — 获取列表长度</span>
+<span class="fn">print</span>(<span class="fn">len</span>(<span class="name">losses</span>))             <span class="cmt"># 4</span></pre></div>
+                    </div>
+
+                    <div class="sub-section">列表推导式</div>
+                    <p>列表推导式是 Python 的"语法糖" —— 用一行代码就能创建列表，比写 for 循环更简洁。AI 生成的代码中大量使用这种写法。</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — 列表推导式</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== 基本语法：[表达式 for 变量 in 可迭代对象] =====</span>
+
+<span class="cmt"># 传统写法</span>
+<span class="name">squares</span> <span class="op">=</span> []
+<span class="kw">for</span> <span class="name">x</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">6</span>):
+    <span class="name">squares</span>.<span class="fn">append</span>(<span class="name">x</span> <span class="op">**</span> <span class="num">2</span>)
+<span class="cmt"># squares = [0, 1, 4, 9, 16, 25]</span>
+
+<span class="cmt"># 推导式写法（一行搞定！）</span>
+<span class="name">squares</span> <span class="op">=</span> [<span class="name">x</span> <span class="op">**</span> <span class="num">2</span> <span class="kw">for</span> <span class="name">x</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">6</span>)]
+<span class="cmt"># 结果: [0, 1, 4, 9, 16, 25]</span>
+
+<span class="cmt"># ===== 带条件的推导式 =====</span>
+<span class="cmt"># 只保留偶数的平方</span>
+<span class="name">even_squares</span> <span class="op">=</span> [<span class="name">x</span> <span class="op">**</span> <span class="num">2</span> <span class="kw">for</span> <span class="name">x</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">10</span>) <span class="kw">if</span> <span class="name">x</span> <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>]
+<span class="cmt"># 结果: [0, 4, 16, 36, 64]</span>
+
+<span class="cmt"># ===== AI 场景：处理损失历史 =====</span>
+<span class="name">raw_losses</span> <span class="op">=</span> [<span class="num">0.9</span>, <span class="num">0.7</span>, <span class="num">0.5</span>, <span class="num">0.3</span>, <span class="num">0.15</span>, <span class="num">0.08</span>]
+<span class="cmt"># 筛选出 loss &gt; 0.2 的轮次</span>
+<span class="name">high_loss</span> <span class="op">=</span> [<span class="name">l</span> <span class="kw">for</span> <span class="name">l</span> <span class="kw">in</span> <span class="name">raw_losses</span> <span class="kw">if</span> <span class="name">l</span> <span class="op">&gt;</span> <span class="num">0.2</span>]
+<span class="fn">print</span>(<span class="name">high_loss</span>)  <span class="cmt"># [0.9, 0.7, 0.5, 0.3]</span>
+
+<span class="cmt"># 将所有损失值四舍五入到2位小数</span>
+<span class="name">rounded</span> <span class="op">=</span> [<span class="fn">round</span>(<span class="name">l</span>, <span class="num">2</span>) <span class="kw">for</span> <span class="name">l</span> <span class="kw">in</span> <span class="name">raw_losses</span>]
+<span class="fn">print</span>(<span class="name">rounded</span>)   <span class="cmt"># [0.9, 0.7, 0.5, 0.3, 0.15, 0.08]</span></pre></div>
+                    </div>
+
+                    <div class="ai-tip tip-box">
+                        <div class="tip-title">AI 协作提示</div>
+                        <p>当 AI 生成包含列表或字典的代码时，你应重点关注：<span class="key-point">数据从哪里来、如何被修改、最终流向哪里</span>。这是审查 AI 代码正确性的核心思路。例如，检查 <code>append()</code> 是否在正确的位置被调用，切片范围是否合理。</p>
+                    </div>
+
+                    <!-- 字典详解 -->
+                    <div class="sub-section">字典（Dictionary）详解</div>
+                    <p>如果说列表是"带编号的收纳架"，那字典就是"带标签的收纳柜"。每个物品都有一个唯一的标签（键，key），通过标签就能快速找到对应的物品（值，value）。</p>
+
+                    <div class="knowledge-card">
+                        <div class="tip-title">概念解释：什么是字典？</div>
+                        <p>字典是一种<strong>键值对（key-value）</strong>的存储结构。用花括号 <code>{}</code> 创建，键和值之间用冒号 <code>:</code> 分隔。在 AI 开发中，字典是最常用的配置管理方式 —— 模型的超参数、训练设置等通常都用字典来存储。</p>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — 字典基础</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== 创建字典 =====</span>
 <span class="name">model_config</span> <span class="op">=</span> {
-    <span class="str">"learning_rate"</span>: <span class="num">0.001</span>,
-    <span class="str">"batch_size"</span>: <span class="num">32</span>,
-    <span class="str">"epochs"</span>: <span class="num">100</span>,
-    <span class="str">"optimizer"</span>: <span class="str">"adam"</span>
+    <span class="str">"learning_rate"</span>: <span class="num">0.001</span>,    <span class="cmt"># 键: 学习率, 值: 0.001</span>
+    <span class="str">"batch_size"</span>: <span class="num">32</span>,          <span class="cmt"># 键: 批大小, 值: 32</span>
+    <span class="str">"epochs"</span>: <span class="num">100</span>,              <span class="cmt"># 键: 训练轮数, 值: 100</span>
+    <span class="str">"optimizer"</span>: <span class="str">"adam"</span>,       <span class="cmt"># 键: 优化器, 值: "adam"</span>
+    <span class="str">"use_gpu"</span>: <span class="kw">True</span>             <span class="cmt"># 键: 是否用GPU, 值: True</span>
 }
 
+<span class="cmt"># ===== 访问值 =====</span>
 <span class="fn">print</span>(<span class="name">model_config</span>[<span class="str">"learning_rate"</span>])  <span class="cmt"># 0.001</span>
-<span class="name">model_config</span>[<span class="str">"epochs"</span>] <span class="op">=</span> <span class="num">200</span>            <span class="cmt"># 修改超参数</span>
+<span class="fn">print</span>(<span class="name">model_config</span>[<span class="str">"optimizer"</span>])      <span class="cmt"># adam</span>
 
-<span class="cmt"># 遍历字典</span>
-<span class="kw">for</span> <span class="name">key</span>, <span class="name">value</span> <span class="kw">in</span> <span class="name">model_config</span>.<span class="fn">items</span>():
-    <span class="fn">print</span>(<span class="str">f"</span><span class="name">{key}</span><span class="str">: </span><span class="name">{value}</span><span class="str">"</span>)</pre></div>
-                    </div>
-                    <div class="tip-box ai-tip">
-                        <div class="tip-title">🤖 AI 协作提示</div>
-                        <p>当 AI 生成包含列表或字典的代码时，你应重点关注：数据从哪里来、如何被修改、最终流向哪里。这是审查 AI 代码正确性的核心思路。</p>
-                    </div>
-                </div>
+<span class="cmt"># ===== 修改值 =====</span>
+<span class="name">model_config</span>[<span class="str">"epochs"</span>] <span class="op">=</span> <span class="num">200</span>             <span class="cmt"># 把训练轮数改为200</span>
+<span class="name">model_config</span>[<span class="str">"learning_rate"</span>] <span class="op">=</span> <span class="num">0.0005</span>     <span class="cmt"># 调整学习率</span>
 
-                <div class="content-block" id="ch1-control">
-                    <h3>程序控制逻辑</h3>
-                    <p>熟练运用条件语句和循环语句来控制程序流程。这是理解算法逻辑步骤的关键。</p>
+<span class="cmt"># ===== 添加新的键值对 =====</span>
+<span class="name">model_config</span>[<span class="str">"momentum"</span>] <span class="op">=</span> <span class="num">0.9</span>             <span class="cmt"># 新增动量参数</span>
+
+<span class="cmt"># ===== 删除键值对 =====</span>
+<span class="kw">del</span> <span class="name">model_config</span>[<span class="str">"momentum"</span>]              <span class="cmt"># 删除 momentum</span>
+
+<span class="cmt"># 安全访问（键不存在时不报错，返回默认值）</span>
+<span class="name">lr</span> <span class="op">=</span> <span class="name">model_config</span>.<span class="fn">get</span>(<span class="str">"lr"</span>, <span class="num">0.01</span>)  <span class="cmt"># 键"lr"不存在，返回默认值0.01</span>
+<span class="fn">print</span>(<span class="name">lr</span>)  <span class="cmt"># 0.01</span></pre></div>
+                    </div>
+
+                    <div class="sub-section">遍历字典的 3 种方式</div>
+
                     <div class="code-block">
                         <div class="code-header">
                             <div class="code-dots"><span></span><span></span><span></span></div>
-                            <span class="code-lang">Python</span>
+                            <span class="code-lang">Python — 遍历字典</span>
                         </div>
-                        <div class="code-body"><pre><span class="cmt"># 条件语句 — 控制分支</span>
+                        <div class="code-body"><pre><span class="name">config</span> <span class="op">=</span> {
+    <span class="str">"lr"</span>: <span class="num">0.001</span>,
+    <span class="str">"batch_size"</span>: <span class="num">32</span>,
+    <span class="str">"epochs"</span>: <span class="num">100</span>
+}
+
+<span class="cmt"># 方式1：只遍历键（keys）</span>
+<span class="kw">for</span> <span class="name">key</span> <span class="kw">in</span> <span class="name">config</span>:
+    <span class="fn">print</span>(<span class="name">key</span>)
+<span class="cmt"># 输出: lr, batch_size, epochs</span>
+
+<span class="cmt"># 方式2：只遍历值（values）</span>
+<span class="kw">for</span> <span class="name">value</span> <span class="kw">in</span> <span class="name">config</span>.<span class="fn">values</span>():
+    <span class="fn">print</span>(<span class="name">value</span>)
+<span class="cmt"># 输出: 0.001, 32, 100</span>
+
+<span class="cmt"># 方式3：同时遍历键和值（最常用！）</span>
+<span class="kw">for</span> <span class="name">key</span>, <span class="name">value</span> <span class="kw">in</span> <span class="name">config</span>.<span class="fn">items</span>():
+    <span class="fn">print</span>(<span class="str">f"</span><span class="name">{key}</span><span class="str"> = </span><span class="name">{value}</span><span class="str">"</span>)
+<span class="cmt"># 输出:</span>
+<span class="cmt"># lr = 0.001</span>
+<span class="cmt"># batch_size = 32</span>
+<span class="cmt"># epochs = 100</span></pre></div>
+                    </div>
+
+                    <div class="warning-box">
+                        <div class="tip-title">注意：字典的键必须是不可变类型</div>
+                        <p>字典的键可以是字符串、数字、元组，但<strong>不能是列表或字典</strong>（因为它们是可变的）。尝试用列表做键会报 <code>TypeError</code>。另外，字典从 Python 3.7 开始保证插入顺序。</p>
+                    </div>
+
+                    <!-- 练习题 1.1 -->
+                    <div class="exercise-box">
+                        <div class="tip-title">练习题 1.1</div>
+                        <ol>
+                            <li>创建一个列表 <code>temperatures</code>，包含一周7天的气温（如 <code>[28, 30, 27, 32, 29, 31, 26]</code>），使用切片获取前3天和后3天的气温，并计算平均气温。</li>
+                            <li>创建一个字典 <code>student</code>，包含 <code>"name"</code>、<code>"age"</code>、<code>"major"</code> 三个键。添加一个新键 <code>"grade"</code>，然后使用 <code>items()</code> 遍历并打印所有信息。</li>
+                            <li>使用列表推导式，从列表 <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code> 中筛选出所有能被3整除的数，并将它们乘以10。</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- ========== 1.2 程序控制逻辑 ========== -->
+                <div class="content-block" id="ch1-control">
+                    <h3>1.2 程序控制逻辑</h3>
+                    <p>如果说变量和数据是程序的"食材"，那控制逻辑就是"菜谱的步骤"。通过条件判断和循环，你可以让程序根据不同情况做出不同的反应，或者重复执行某些操作。</p>
+
+                    <!-- if-elif-else -->
+                    <div class="sub-section">条件语句 if-elif-else</div>
+                    <p>条件语句让程序能够"做判断"。就像你出门前会看天气：如果下雨就带伞，否则就不带。Python 用 <code>if</code>、<code>elif</code>、<code>else</code> 三个关键字来实现多分支判断。</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — 条件语句基础</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== 基本语法结构 =====</span>
 <span class="name">accuracy</span> <span class="op">=</span> <span class="num">0.92</span>
 
-<span class="kw">if</span> <span class="name">accuracy</span> <span class="op">>=</span> <span class="num">0.95</span>:
-    <span class="fn">print</span>(<span class="str">"模型表现优秀！"</span>)
-<span class="kw">elif</span> <span class="name">accuracy</span> <span class="op">>=</span> <span class="num">0.85</span>:
-    <span class="fn">print</span>(<span class="str">"模型表现良好"</span>)     <span class="cmt"># ← 执行这行</span>
-<span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"需要继续调优"</span>)
+<span class="kw">if</span> <span class="name">accuracy</span> <span class="op">&gt;=</span> <span class="num">0.95</span>:                    <span class="cmt"># 条件1：准确率 &gt;= 95%</span>
+    <span class="fn">print</span>(<span class="str">"模型表现优秀！可以部署"</span>)
+<span class="kw">elif</span> <span class="name">accuracy</span> <span class="op">&gt;=</span> <span class="num">0.85</span>:                  <span class="cmt"># 条件2：准确率 &gt;= 85%</span>
+    <span class="fn">print</span>(<span class="str">"模型表现良好，可继续优化"</span>)   <span class="cmt"># ← 命中这个分支</span>
+<span class="kw">elif</span> <span class="name">accuracy</span> <span class="op">&gt;=</span> <span class="num">0.70</span>:                  <span class="cmt"># 条件3：准确率 &gt;= 70%</span>
+    <span class="fn">print</span>(<span class="str">"模型表现一般，需要调参"</span>)
+<span class="kw">else</span>:                                  <span class="cmt"># 以上条件都不满足</span>
+    <span class="fn">print</span>(<span class="str">"模型表现不佳，建议重新设计"</span>)</pre></div>
+                    </div>
 
-<span class="cmt"># for 循环 — 遍历训练过程</span>
-<span class="name">epochs</span> <span class="op">=</span> <span class="num">5</span>
-<span class="kw">for</span> <span class="name">epoch</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="name">epochs</span>):
-    <span class="name">loss</span> <span class="op">=</span> <span class="num">1.0</span> <span class="op">/</span> (<span class="name">epoch</span> <span class="op">+</span> <span class="num">1</span>)   <span class="cmt"># 模拟损失递减</span>
-    <span class="fn">print</span>(<span class="str">f"Epoch </span><span class="name">{epoch+1}</span><span class="str">: loss = </span><span class="name">{loss:</span><span class="str">.4f}</span><span class="str">"</span>)
+                    <div class="output-block">模型表现良好，可继续优化</div>
 
-<span class="cmt"># while 循环 — 达到目标前持续训练</span>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — 逻辑运算符组合条件</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== and：两个条件都必须满足 =====</span>
+<span class="name">loss</span> <span class="op">=</span> <span class="num">0.08</span>
+<span class="name">acc</span> <span class="op">=</span> <span class="num">0.96</span>
+<span class="kw">if</span> <span class="name">loss</span> <span class="op">&lt;</span> <span class="num">0.1</span> <span class="kw">and</span> <span class="name">acc</span> <span class="op">&gt;</span> <span class="num">0.95</span>:
+    <span class="fn">print</span>(<span class="str">"训练完成，模型达到目标！"</span>)
+
+<span class="cmt"># ===== or：至少一个条件满足即可 =====</span>
+<span class="name">gpu_available</span> <span class="op">=</span> <span class="kw">False</span>
+<span class="name">tpu_available</span> <span class="op">=</span> <span class="kw">True</span>
+<span class="kw">if</span> <span class="name">gpu_available</span> <span class="kw">or</span> <span class="name">tpu_available</span>:
+    <span class="fn">print</span>(<span class="str">"可以使用加速硬件训练"</span>)
+
+<span class="cmt"># ===== not：取反 =====</span>
+<span class="name">is_overfitting</span> <span class="op">=</span> <span class="kw">False</span>
+<span class="kw">if</span> <span class="kw">not</span> <span class="name">is_overfitting</span>:
+    <span class="fn">print</span>(<span class="str">"模型没有过拟合，继续训练"</span>)
+
+<span class="cmt"># ===== 嵌套条件 =====</span>
+<span class="name">model_type</span> <span class="op">=</span> <span class="str">"cnn"</span>
+<span class="name">dataset_size</span> <span class="op">=</span> <span class="num">50000</span>
+
+<span class="kw">if</span> <span class="name">model_type</span> <span class="op">==</span> <span class="str">"cnn"</span>:                    <span class="cmt"># 外层：判断模型类型</span>
+    <span class="kw">if</span> <span class="name">dataset_size</span> <span class="op">&gt;</span> <span class="num">10000</span>:             <span class="cmt"># 内层：判断数据量</span>
+        <span class="fn">print</span>(<span class="str">"数据充足，CNN 可以发挥优势"</span>)
+    <span class="kw">else</span>:
+        <span class="fn">print</span>(<span class="str">"数据量不足，建议数据增强或换模型"</span>)
+<span class="kw">elif</span> <span class="name">model_type</span> <span class="op">==</span> <span class="str">"transformer"</span>:
+    <span class="fn">print</span>(<span class="str">"Transformer 模型需要更多数据"</span>)</pre></div>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-title">学习技巧：注意缩进！</div>
+                        <p>Python 用<strong>缩进</strong>（通常是4个空格）来表示代码块的层次关系，而不是用大括号 <code>{}</code>。缩进错误是新手最常见的 Bug 之一。建议在编辑器中设置 Tab 键自动转为4个空格。</p>
+                    </div>
+
+                    <!-- for 循环 -->
+                    <div class="sub-section">for 循环</div>
+                    <p>for 循环用于<strong>遍历一个序列</strong>（列表、字符串、range 等），对每个元素执行相同的操作。就像你逐个检查流水线上的产品。</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — for 循环基础</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== 遍历列表 =====</span>
+<span class="name">models</span> <span class="op">=</span> [<span class="str">"ResNet"</span>, <span class="str">"BERT"</span>, <span class="str">"GPT"</span>]
+<span class="kw">for</span> <span class="name">model</span> <span class="kw">in</span> <span class="name">models</span>:
+    <span class="fn">print</span>(<span class="str">f"正在加载模型: </span><span class="name">{model}</span><span class="str">"</span>)
+
+<span class="cmt"># ===== range() 函数详解 =====</span>
+<span class="cmt"># range(stop)       — 从 0 到 stop-1</span>
+<span class="kw">for</span> <span class="name">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>):        <span class="cmt"># 0, 1, 2, 3, 4</span>
+    <span class="fn">print</span>(<span class="name">i</span>, <span class="name">end</span><span class="op">=</span><span class="str">" "</span>)
+
+<span class="cmt"># range(start, stop) — 从 start 到 stop-1</span>
+<span class="kw">for</span> <span class="name">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">2</span>, <span class="num">6</span>):      <span class="cmt"># 2, 3, 4, 5</span>
+    <span class="fn">print</span>(<span class="name">i</span>, <span class="name">end</span><span class="op">=</span><span class="str">" "</span>)
+
+<span class="cmt"># range(start, stop, step) — 从 start 到 stop-1，步长为 step</span>
+<span class="kw">for</span> <span class="name">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">0</span>, <span class="num">10</span>, <span class="num">2</span>):   <span class="cmt"># 0, 2, 4, 6, 8（偶数）</span>
+    <span class="fn">print</span>(<span class="name">i</span>, <span class="name">end</span><span class="op">=</span><span class="str">" "</span>)
+
+<span class="cmt"># ===== enumerate() — 同时获取索引和值 =====</span>
+<span class="name">losses</span> <span class="op">=</span> [<span class="num">0.9</span>, <span class="num">0.7</span>, <span class="num">0.5</span>, <span class="num">0.3</span>]
+<span class="kw">for</span> <span class="name">epoch</span>, <span class="name">loss</span> <span class="kw">in</span> <span class="fn">enumerate</span>(<span class="name">losses</span>):
+    <span class="fn">print</span>(<span class="str">f"Epoch </span><span class="name">{epoch+1}</span><span class="str">: loss = </span><span class="name">{loss}</span><span class="str">"</span>)
+<span class="cmt"># 输出:</span>
+<span class="cmt"># Epoch 1: loss = 0.9</span>
+<span class="cmt"># Epoch 2: loss = 0.7</span>
+<span class="cmt"># Epoch 3: loss = 0.5</span>
+<span class="cmt"># Epoch 4: loss = 0.3</span></pre></div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — AI 场景：模拟训练 Epoch</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== AI 场景：模拟模型训练过程 =====</span>
+<span class="name">total_epochs</span> <span class="op">=</span> <span class="num">5</span>
+<span class="name">loss</span> <span class="op">=</span> <span class="num">1.0</span>  <span class="cmt"># 初始损失值</span>
+
+<span class="kw">for</span> <span class="name">epoch</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="name">total_epochs</span>):
+    <span class="name">loss</span> <span class="op">*=</span> <span class="num">0.7</span>                    <span class="cmt"># 每轮损失降低30%</span>
+    <span class="name">accuracy</span> <span class="op">=</span> <span class="num">1.0</span> <span class="op">-</span> <span class="name">loss</span>        <span class="cmt"># 模拟准确率提升</span>
+    <span class="fn">print</span>(<span class="str">f"Epoch </span><span class="name">{epoch+1}</span><span class="str">/</span><span class="name">{total_epochs}</span><span class="str"> | "</span>
+          <span class="str">Loss: </span><span class="name">{loss:.4f}</span><span class="str"> | Acc: </span><span class="name">{accuracy:.2%}</span><span class="str">"</span>)</pre></div>
+                    </div>
+
+                    <div class="output-block">Epoch 1/5 | Loss: 0.7000 | Acc: 30.00%
+Epoch 2/5 | Loss: 0.4900 | Acc: 51.00%
+Epoch 3/5 | Loss: 0.3430 | Acc: 65.70%
+Epoch 4/5 | Loss: 0.2401 | Acc: 75.99%
+Epoch 5/5 | Loss: 0.1681 | Acc: 83.19%</div>
+
+                    <!-- while 循环 -->
+                    <div class="sub-section">while 循环</div>
+                    <p>while 循环在<strong>条件为 True 时一直执行</strong>，适合"不知道要循环多少次"的场景。就像你一直学习直到考试及格为止。</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — while 循环</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== 基本语法 =====</span>
+<span class="name">count</span> <span class="op">=</span> <span class="num">0</span>
+<span class="kw">while</span> <span class="name">count</span> <span class="op">&lt;</span> <span class="num">5</span>:           <span class="cmt"># 当 count &lt; 5 时持续执行</span>
+    <span class="fn">print</span>(<span class="name">count</span>, <span class="name">end</span><span class="op">=</span><span class="str">" "</span>)
+    <span class="name">count</span> <span class="op">+=</span> <span class="num">1</span>              <span class="cmt"># 一定要修改条件变量！否则死循环</span>
+<span class="cmt"># 输出: 0 1 2 3 4</span>
+
+<span class="cmt"># ===== AI 场景：持续训练直到损失达标 =====</span>
 <span class="name">loss</span> <span class="op">=</span> <span class="num">1.0</span>
 <span class="name">step</span> <span class="op">=</span> <span class="num">0</span>
-<span class="kw">while</span> <span class="name">loss</span> <span class="op">></span> <span class="num">0.1</span>:
-    <span class="name">loss</span> <span class="op">*=</span> <span class="num">0.7</span>    <span class="cmt"># 模拟损失下降</span>
-    <span class="name">step</span> <span class="op">+=</span> <span class="num">1</span>
-<span class="fn">print</span>(<span class="str">f"经过 </span><span class="name">{step}</span><span class="str"> 步，loss 降至 </span><span class="name">{loss:</span><span class="str">.4f}</span><span class="str">"</span>)
+<span class="name">target_loss</span> <span class="op">=</span> <span class="num">0.1</span>
 
-<span class="cmt"># break 与 continue</span>
+<span class="kw">while</span> <span class="name">loss</span> <span class="op">&gt;</span> <span class="name">target_loss</span>:     <span class="cmt"># 只要损失还没达标，就继续训练</span>
+    <span class="name">loss</span> <span class="op">*=</span> <span class="num">0.7</span>                <span class="cmt"># 模拟损失下降</span>
+    <span class="name">step</span> <span class="op">+=</span> <span class="num">1</span>                  <span class="cmt"># 步数加1</span>
+    <span class="fn">print</span>(<span class="str">f"Step </span><span class="name">{step}</span><span class="str">: loss = </span><span class="name">{loss:.4f}</span><span class="str">"</span>)
+
+<span class="fn">print</span>(<span class="str">f"经过 </span><span class="name">{step}</span><span class="str"> 步训练，loss 降至 </span><span class="name">{loss:.4f}</span><span class="str">，达标！"</span>)</pre></div>
+                    </div>
+
+                    <div class="output-block">Step 1: loss = 0.7000
+Step 2: loss = 0.4900
+Step 3: loss = 0.3430
+Step 4: loss = 0.2401
+Step 5: loss = 0.1681
+Step 6: loss = 0.1176
+Step 7: loss = 0.0824
+经过 7 步训练，loss 降至 0.0824，达标！</div>
+
+                    <div class="knowledge-card">
+                        <div class="tip-title">概念解释：for 循环 vs while 循环</div>
+                        <p><strong>for 循环</strong>：知道要循环多少次（遍历列表、range）。<strong>while 循环</strong>：不知道要循环多少次，只知道终止条件（损失达标、用户输入正确密码）。在 AI 训练中，for 循环常用于固定 epoch 数的训练，while 循环常用于早停（Early Stopping）等动态终止策略。</p>
+                    </div>
+
+                    <!-- break 和 continue -->
+                    <div class="sub-section">break 和 continue</div>
+                    <p>这两个关键字用于在循环中"跳过"或"提前退出"，让循环控制更加灵活。</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — break 和 continue</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== break：提前退出整个循环 =====</span>
+<span class="kw">for</span> <span class="name">epoch</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">100</span>):
+    <span class="name">loss</span> <span class="op">=</span> <span class="num">1.0</span> <span class="op">/</span> (<span class="name">epoch</span> <span class="op">+</span> <span class="num">1</span>)
+    <span class="kw">if</span> <span class="name">loss</span> <span class="op">&lt;</span> <span class="num">0.05</span>:              <span class="cmt"># 损失足够低了</span>
+        <span class="fn">print</span>(<span class="str">f"Epoch </span><span class="name">{epoch+1}</span><span class="str">: 提前停止！loss=</span><span class="name">{loss:.4f}</span><span class="str">"</span>)
+        <span class="kw">break</span>                     <span class="cmt"># 立即退出循环</span>
+
+<span class="cmt"># ===== continue：跳过本次，继续下一次 =====</span>
 <span class="kw">for</span> <span class="name">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">10</span>):
-    <span class="kw">if</span> <span class="name">i</span> <span class="op">==</span> <span class="num">3</span>: <span class="kw">continue</span>  <span class="cmt"># 跳过第 3 轮</span>
-    <span class="kw">if</span> <span class="name">i</span> <span class="op">==</span> <span class="num">7</span>: <span class="kw">break</span>     <span class="cmt"># 第 7 轮提前停止</span>
-    <span class="fn">print</span>(<span class="name">i</span>, <span class="name">end</span><span class="op">=</span><span class="str">" "</span>)  <span class="cmt"># 0 1 2 4 5 6</span></pre></div>
+    <span class="kw">if</span> <span class="name">i</span> <span class="op">%</span> <span class="num">3</span> <span class="op">==</span> <span class="num">0</span>:            <span class="cmt"># 跳过能被3整除的数</span>
+        <span class="kw">continue</span>
+    <span class="fn">print</span>(<span class="name">i</span>, <span class="name">end</span><span class="op">=</span><span class="str">" "</span>)
+<span class="cmt"># 输出: 1 2 4 5 7 8</span>
+
+<span class="cmt"># ===== AI 场景：早停机制（Early Stopping）=====</span>
+<span class="name">patience</span> <span class="op">=</span> <span class="num">3</span>          <span class="cmt"># 容忍连续3轮没有改善</span>
+<span class="name">wait</span> <span class="op">=</span> <span class="num">0</span>             <span class="cmt"># 等待计数器</span>
+<span class="name">best_loss</span> <span class="op">=</span> <span class="num">999</span>      <span class="cmt"># 最佳损失（初始设很大）</span>
+
+<span class="kw">for</span> <span class="name">epoch</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">20</span>):
+    <span class="name">loss</span> <span class="op">=</span> <span class="num">0.5</span> <span class="op">/</span> (<span class="name">epoch</span> <span class="op">+</span> <span class="num">1</span>) <span class="op">+</span> <span class="num">0.01</span> <span class="op">*</span> <span class="name">epoch</span>  <span class="cmt"># 模拟先降后升的损失</span>
+
+    <span class="kw">if</span> <span class="name">loss</span> <span class="op">&lt;</span> <span class="name">best_loss</span>:       <span class="cmt"># 如果当前损失比历史最佳更好</span>
+        <span class="name">best_loss</span> <span class="op">=</span> <span class="name">loss</span>       <span class="cmt"># 更新最佳损失</span>
+        <span class="name">wait</span> <span class="op">=</span> <span class="num">0</span>               <span class="cmt"># 重置等待计数器</span>
+        <span class="fn">print</span>(<span class="str">f"Epoch </span><span class="name">{epoch+1}</span><span class="str">: 新最佳! loss=</span><span class="name">{loss:.4f}</span><span class="str">"</span>)
+    <span class="kw">else</span>:                      <span class="cmt"># 没有改善</span>
+        <span class="name">wait</span> <span class="op">+=</span> <span class="num">1</span>               <span class="cmt"># 等待计数+1</span>
+        <span class="fn">print</span>(<span class="str">f"Epoch </span><span class="name">{epoch+1}</span><span class="str">: 无改善 (</span><span class="name">{wait}</span><span class="str">/</span><span class="name">{patience}</span><span class="str">)"</span>)
+        <span class="kw">if</span> <span class="name">wait</span> <span class="op">&gt;=</span> <span class="name">patience</span>:     <span class="cmt"># 超过容忍次数</span>
+            <span class="fn">print</span>(<span class="str">f"连续 </span><span class="name">{patience}</span><span class="str"> 轮无改善，提前停止训练！"</span>)
+            <span class="kw">break</span>             <span class="cmt"># 早停！</span></pre></div>
+                    </div>
+
+                    <div class="ai-tip tip-box">
+                        <div class="tip-title">AI 协作提示</div>
+                        <p>早停（Early Stopping）是 AI 训练中非常重要的技术，用于防止过拟合。当 AI 为你生成训练代码时，注意检查 <code>break</code> 的触发条件是否合理 —— 过早停止可能导致模型欠拟合，过晚停止则浪费时间。通常 patience 设为 3~5 比较合理。</p>
+                    </div>
+
+                    <!-- 练习题 1.2 -->
+                    <div class="exercise-box">
+                        <div class="tip-title">练习题 1.2</div>
+                        <ol>
+                            <li>编写一个程序，使用 for 循环和 if 语句，找出列表 <code>[23, 45, 12, 67, 34, 89, 56]</code> 中的最大值和最小值（不要使用内置的 <code>max()</code> 和 <code>min()</code>）。</li>
+                            <li>使用 while 循环实现一个简单的"猜数字"游戏：设定一个目标数字（如 42），让用户不断输入猜测值，给出"大了"或"小了"的提示，直到猜对为止。</li>
+                            <li>使用 for 循环和 <code>enumerate()</code>，遍历模型准确率列表 <code>[0.60, 0.72, 0.81, 0.88, 0.91, 0.93, 0.94, 0.94, 0.95]</code>，找出准确率首次超过 0.90 的轮次。</li>
+                        </ol>
                     </div>
                 </div>
 
+                <!-- ========== 1.3 函数 ========== -->
                 <div class="content-block" id="ch1-func">
-                    <h3>函数</h3>
-                    <p>函数是组织代码的基本单元，必须掌握其定义、参数传递和返回值。</p>
+                    <h3>1.3 函数</h3>
+
+                    <!-- 什么是函数 -->
+                    <div class="sub-section">什么是函数？</div>
+                    <p>想象你有一份<strong>蛋糕食谱</strong>：上面写着需要哪些原料、按什么步骤操作。每次你想做蛋糕，只需要按照食谱来，不用重新发明做法。在编程中，<span class="key-point">函数就是"食谱" —— 把一段有用的代码封装起来，需要时直接调用</span>。</p>
+
+                    <div class="knowledge-card">
+                        <div class="tip-title">概念解释：函数 = 食谱/公式</div>
+                        <p>函数由三部分组成：<strong>输入（参数）</strong> = 原料，<strong>处理过程（函数体）</strong> = 制作步骤，<strong>输出（返回值）</strong> = 做好的蛋糕。定义一次，可以反复使用。这避免了代码重复，让程序更清晰、更易维护。</p>
+                    </div>
+
+                    <!-- 定义和调用 -->
+                    <div class="sub-section">定义和调用函数</div>
+
                     <div class="code-block">
                         <div class="code-header">
                             <div class="code-dots"><span></span><span></span><span></span></div>
-                            <span class="code-lang">Python</span>
+                            <span class="code-lang">Python — 函数基础</span>
                         </div>
-                        <div class="code-body"><pre><span class="cmt"># 基本函数</span>
+                        <div class="code-body"><pre><span class="cmt"># ===== 定义函数的基本结构 =====</span>
 <span class="kw">def</span> <span class="fn">calculate_accuracy</span>(<span class="name">correct</span>, <span class="name">total</span>):
-    <span class="str">"""计算分类准确率"""</span>
-    <span class="kw">if</span> <span class="name">total</span> <span class="op">==</span> <span class="num">0</span>:
+    <span class="str">"""计算分类准确率
+
+    Args:
+        correct: 正确预测的样本数
+        total: 总样本数
+    Returns:
+        准确率（0到1之间的浮点数）
+    """</span>
+    <span class="kw">if</span> <span class="name">total</span> <span class="op">==</span> <span class="num">0</span>:          <span class="cmt"># 防止除以零</span>
         <span class="kw">return</span> <span class="num">0</span>
-    <span class="kw">return</span> <span class="name">correct</span> <span class="op">/</span> <span class="name">total</span>
+    <span class="kw">return</span> <span class="name">correct</span> <span class="op">/</span> <span class="name">total</span>  <span class="cmt"># 返回计算结果</span>
 
-<span class="fn">print</span>(<span class="fn">calculate_accuracy</span>(<span class="num">92</span>, <span class="num">100</span>))  <span class="cmt"># 0.92</span>
+<span class="cmt"># ===== 调用函数 =====</span>
+<span class="name">acc</span> <span class="op">=</span> <span class="fn">calculate_accuracy</span>(<span class="num">92</span>, <span class="num">100</span>)
+<span class="fn">print</span>(<span class="str">f"准确率: </span><span class="name">{acc:.2%}</span><span class="str">"</span>)  <span class="cmt"># 准确率: 92.00%</span>
 
-<span class="cmt"># 默认参数</span>
+<span class="cmt"># ===== 函数命名规范 =====</span>
+<span class="cmt"># 好的命名：动词开头，描述函数做什么</span>
+<span class="kw">def</span> <span class="fn">train_model</span>(<span class="name">data</span>): ...     <span class="cmt"># ✓ 清晰</span>
+<span class="kw">def</span> <span class="fn">load_dataset</span>(<span class="name">path</span>): ...   <span class="cmt"># ✓ 清晰</span>
+<span class="kw">def</span> <span class="fn">tm</span>(<span class="name">d</span>): ...                <span class="cmt"># ✗ 太简短，难以理解</span></pre></div>
+                    </div>
+
+                    <!-- 参数详解 -->
+                    <div class="sub-section">参数详解</div>
+                    <p>参数是函数的"输入接口"，不同类型的参数让函数更加灵活。</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — 函数参数</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== 1. 位置参数（必须按顺序传入）=====</span>
+<span class="kw">def</span> <span class="fn">train_model</span>(<span class="name">data</span>, <span class="name">epochs</span>, <span class="name">lr</span>):
+    <span class="fn">print</span>(<span class="str">f"用 </span><span class="name">{data}</span><span class="str"> 训练 </span><span class="name">{epochs}</span><span class="str"> 轮, 学习率=</span><span class="name">{lr}</span><span class="str">"</span>)
+
+<span class="fn">train_model</span>(<span class="str">"images"</span>, <span class="num">10</span>, <span class="num">0.001</span>)  <span class="cmt"># 必须按顺序传入3个参数</span>
+
+<span class="cmt"># ===== 2. 默认参数（不传就用默认值）=====</span>
 <span class="kw">def</span> <span class="fn">train_model</span>(<span class="name">data</span>, <span class="name">epochs</span><span class="op">=</span><span class="num">10</span>, <span class="name">lr</span><span class="op">=</span><span class="num">0.001</span>):
-    <span class="fn">print</span>(<span class="str">f"训练 </span><span class="name">{epochs}</span><span class="str"> 轮, 学习率=</span><span class="name">{lr}</span><span class="str">"</span>)
-    <span class="cmt"># ... 训练逻辑</span>
+    <span class="fn">print</span>(<span class="str">f"用 </span><span class="name">{data}</span><span class="str"> 训练 </span><span class="name">{epochs}</span><span class="str"> 轮, 学习率=</span><span class="name">{lr}</span><span class="str">"</span>)
 
-<span class="fn">train_model</span>(<span class="name">data</span><span class="op">=</span><span class="name">my_data</span>)                <span class="cmt"># 使用默认值</span>
-<span class="fn">train_model</span>(<span class="name">data</span><span class="op">=</span><span class="name">my_data</span>, <span class="name">epochs</span><span class="op">=</span><span class="num">50</span>)     <span class="cmt"># 覆盖默认值</span>
+<span class="fn">train_model</span>(<span class="str">"images"</span>)                <span class="cmt"># 使用默认值：10轮, lr=0.001</span>
+<span class="fn">train_model</span>(<span class="str">"images"</span>, <span class="name">epochs</span><span class="op">=</span><span class="num">50</span>)     <span class="cmt"># 只覆盖 epochs</span>
 
-<span class="cmt"># Lambda 表达式 — 配合高阶函数</span>
+<span class="cmt"># ===== 3. 关键字参数（用参数名指定，顺序无关）=====</span>
+<span class="fn">train_model</span>(<span class="name">lr</span><span class="op">=</span><span class="num">0.01</span>, <span class="name">data</span><span class="op">=</span><span class="str">"text"</span>, <span class="name">epochs</span><span class="op">=</span><span class="num">20</span>)  <span class="cmt"># 顺序无关</span>
+
+<span class="cmt"># ===== 4. 可变参数 *args（接收任意数量的位置参数）=====</span>
+<span class="kw">def</span> <span class="fn">compare_models</span>(<span class="op">*</span><span class="name">accuracies</span>):
+    <span class="str">"""比较多个模型的准确率"""</span>
+    <span class="kw">for</span> <span class="name">i</span>, <span class="name">acc</span> <span class="kw">in</span> <span class="fn">enumerate</span>(<span class="name">accuracies</span>):
+        <span class="fn">print</span>(<span class="str">f"模型</span><span class="name">{i+1}</span><span class="str"> 准确率: </span><span class="name">{acc:.2%}</span><span class="str">"</span>)
+    <span class="fn">print</span>(<span class="str">f"最佳: </span><span class="name">{</span><span class="fn">max</span>(<span class="name">accuracies</span>):<span class="name">.2%}</span><span class="str">"</span>)
+
+<span class="fn">compare_models</span>(<span class="num">0.85</span>, <span class="num">0.92</span>, <span class="num">0.88</span>, <span class="num">0.95</span>)  <span class="cmt"># 传入任意数量</span>
+
+<span class="cmt"># ===== 5. 可变关键字参数 **kwargs（接收任意数量的关键字参数）=====</span>
+<span class="kw">def</span> <span class="fn">train_with_config</span>(<span class="name">data</span>, <span class="op">**</span><span class="name">config</span>):
+    <span class="str">"""使用配置字典训练模型"""</span>
+    <span class="fn">print</span>(<span class="str">f"数据: </span><span class="name">{data}</span><span class="str">"</span>)
+    <span class="kw">for</span> <span class="name">key</span>, <span class="name">value</span> <span class="kw">in</span> <span class="name">config</span>.<span class="fn">items</span>():
+        <span class="fn">print</span>(<span class="str">f"  </span><span class="name">{key}</span><span class="str"> = </span><span class="name">{value}</span><span class="str">"</span>)
+
+<span class="fn">train_with_config</span>(<span class="str">"images"</span>, <span class="name">epochs</span><span class="op">=</span><span class="num">50</span>, <span class="name">lr</span><span class="op">=</span><span class="num">0.001</span>, <span class="name">batch_size</span><span class="op">=</span><span class="num">32</span>)</pre></div>
+                    </div>
+
+                    <!-- 返回值 -->
+                    <div class="sub-section">返回值</div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — 返回值</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== return 语句 =====</span>
+<span class="kw">def</span> <span class="fn">calculate_metrics</span>(<span class="name">correct</span>, <span class="name">total</span>, <span class="name">loss</span>):
+    <span class="name">accuracy</span> <span class="op">=</span> <span class="name">correct</span> <span class="op">/</span> <span class="name">total</span>  <span class="cmt"># 计算准确率</span>
+    <span class="kw">return</span> <span class="name">accuracy</span>               <span class="cmt"># 返回一个值</span>
+
+<span class="name">acc</span> <span class="op">=</span> <span class="fn">calculate_metrics</span>(<span class="num">90</span>, <span class="num">100</span>, <span class="num">0.3</span>)
+<span class="fn">print</span>(<span class="name">acc</span>)  <span class="cmt"># 0.9</span>
+
+<span class="cmt"># ===== 返回多个值（元组解包）=====</span>
+<span class="kw">def</span> <span class="fn">evaluate_model</span>(<span class="name">predictions</span>, <span class="name">labels</span>):
+    <span class="str">"""评估模型，返回多个指标"""</span>
+    <span class="name">correct</span> <span class="op">=</span> <span class="fn">sum</span>(<span class="num">1</span> <span class="kw">for</span> <span class="name">p</span>, <span class="name">l</span> <span class="kw">in</span> <span class="fn">zip</span>(<span class="name">predictions</span>, <span class="name">labels</span>) <span class="kw">if</span> <span class="name">p</span> <span class="op">==</span> <span class="name">l</span>)
+    <span class="name">total</span> <span class="op">=</span> <span class="fn">len</span>(<span class="name">labels</span>)
+    <span class="name">accuracy</span> <span class="op">=</span> <span class="name">correct</span> <span class="op">/</span> <span class="name">total</span>
+    <span class="name">error_rate</span> <span class="op">=</span> <span class="num">1.0</span> <span class="op">-</span> <span class="name">accuracy</span>
+    <span class="kw">return</span> <span class="name">accuracy</span>, <span class="name">error_rate</span>, <span class="name">correct</span>  <span class="cmt"># 返回多个值（实际是元组）</span>
+
+<span class="cmt"># 元组解包：用多个变量接收返回值</span>
+<span class="name">acc</span>, <span class="name">err</span>, <span class="name">cnt</span> <span class="op">=</span> <span class="fn">evaluate_model</span>([<span class="num">1</span>,<span class="num">0</span>,<span class="num">1</span>,<span class="num">1</span>], [<span class="num">1</span>,<span class="num">0</span>,<span class="num">0</span>,<span class="num">1</span>])
+<span class="fn">print</span>(<span class="str">f"准确率: </span><span class="name">{acc:.2%}</span><span class="str">, 错误率: </span><span class="name">{err:.2%}</span><span class="str">, 正确数: </span><span class="name">{cnt}</span><span class="str">"</span>)
+<span class="cmt"># 输出: 准确率: 75.00%, 错误率: 25.00%, 正确数: 3</span></pre></div>
+                    </div>
+
+                    <!-- 变量作用域 -->
+                    <div class="sub-section">变量作用域</div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — 变量作用域</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== 局部变量 vs 全局变量 =====</span>
+<span class="name">global_lr</span> <span class="op">=</span> <span class="num">0.001</span>  <span class="cmt"># 全局变量（在函数外定义）</span>
+
+<span class="kw">def</span> <span class="fn">train</span>():
+    <span class="name">local_epoch</span> <span class="op">=</span> <span class="num">10</span>  <span class="cmt"># 局部变量（在函数内定义）</span>
+    <span class="fn">print</span>(<span class="str">f"内部 - 全局lr: </span><span class="name">{global_lr}</span><span class="str">"</span>)   <span class="cmt"># ✓ 可以读取全局变量</span>
+    <span class="fn">print</span>(<span class="str">f"内部 - 局部epoch: </span><span class="name">{local_epoch}</span><span class="str">"</span>) <span class="cmt"># ✓ 可以读取局部变量</span>
+
+<span class="fn">train</span>()
+<span class="fn">print</span>(<span class="name">global_lr</span>)     <span class="cmt"># ✓ 全局变量可以在函数外访问</span>
+<span class="cmt"># print(local_epoch)  # ✗ 报错！局部变量在函数外不可见</span>
+
+<span class="cmt"># ===== global 关键字：在函数内修改全局变量 =====</span>
+<span class="name">counter</span> <span class="op">=</span> <span class="num">0</span>
+
+<span class="kw">def</span> <span class="fn">increment</span>():
+    <span class="kw">global</span> <span class="name">counter</span>      <span class="cmt"># 声明要修改的是全局变量</span>
+    <span class="name">counter</span> <span class="op">+=</span> <span class="num">1</span>       <span class="cmt"># 修改全局变量</span>
+
+<span class="fn">increment</span>()
+<span class="fn">increment</span>()
+<span class="fn">print</span>(<span class="name">counter</span>)  <span class="cmt"># 2</span></pre></div>
+                    </div>
+
+                    <div class="warning-box">
+                        <div class="tip-title">注意：谨慎使用 global</div>
+                        <p>过度使用 <code>global</code> 会让代码难以调试和维护。在 AI 项目中，建议用类（Class）的属性来管理共享状态，而不是全局变量。好的函数应该是"自包含"的 —— 只通过参数接收输入，只通过返回值输出结果。</p>
+                    </div>
+
+                    <!-- Lambda 表达式 -->
+                    <div class="sub-section">Lambda 表达式</div>
+                    <p>Lambda 是一种"匿名函数" —— 没有名字、只有一行的简单函数。常与 <code>map()</code> 和 <code>filter()</code> 配合使用。</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — Lambda 表达式</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== 普通函数 vs Lambda =====</span>
+<span class="cmt"># 普通函数</span>
+<span class="kw">def</span> <span class="fn">square</span>(<span class="name">x</span>):
+    <span class="kw">return</span> <span class="name">x</span> <span class="op">**</span> <span class="num">2</span>
+
+<span class="cmt"># Lambda（等价写法，一行搞定）</span>
+<span class="name">square</span> <span class="op">=</span> <span class="kw">lambda</span> <span class="name">x</span>: <span class="name">x</span> <span class="op">**</span> <span class="num">2</span>
+<span class="fn">print</span>(<span class="name">square</span>(<span class="num">5</span>))  <span class="cmt"># 25</span>
+
+<span class="cmt"># ===== 配合 map() 使用（对每个元素应用函数）=====</span>
 <span class="name">numbers</span> <span class="op">=</span> [<span class="num">3</span>, <span class="num">1</span>, <span class="num">4</span>, <span class="num">1</span>, <span class="num">5</span>]
-<span class="name">squared</span> <span class="op">=</span> <span class="fn">list</span>(<span class="fn">map</span>(<span class="kw">lambda</span> <span class="name">x</span>: <span class="name">x</span><span class="op">**</span><span class="num">2</span>, <span class="name">numbers</span>))   <span class="cmt"># [9, 1, 16, 1, 25]</span>
-<span class="name">evens</span> <span class="op">=</span> <span class="fn">list</span>(<span class="fn">filter</span>(<span class="kw">lambda</span> <span class="name">x</span>: <span class="name">x</span><span class="op">%</span><span class="num">2</span><span class="op">==</span><span class="num">0</span>, <span class="name">numbers</span>))   <span class="cmt"># [4]</span></pre></div>
+<span class="name">squared</span> <span class="op">=</span> <span class="fn">list</span>(<span class="fn">map</span>(<span class="kw">lambda</span> <span class="name">x</span>: <span class="name">x</span> <span class="op">**</span> <span class="num">2</span>, <span class="name">numbers</span>))
+<span class="fn">print</span>(<span class="name">squared</span>)  <span class="cmt"># [9, 1, 16, 1, 25]</span>
+
+<span class="cmt"># ===== 配合 filter() 使用（筛选满足条件的元素）=====</span>
+<span class="name">evens</span> <span class="op">=</span> <span class="fn">list</span>(<span class="fn">filter</span>(<span class="kw">lambda</span> <span class="name">x</span>: <span class="name">x</span> <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>, <span class="name">numbers</span>))
+<span class="fn">print</span>(<span class="name">evens</span>)    <span class="cmt"># [4]</span>
+
+<span class="cmt"># ===== AI 场景：对损失列表做归一化 =====</span>
+<span class="name">losses</span> <span class="op">=</span> [<span class="num">0.9</span>, <span class="num">0.7</span>, <span class="num">0.5</span>, <span class="num">0.3</span>, <span class="num">0.1</span>]
+<span class="name">max_loss</span> <span class="op">=</span> <span class="fn">max</span>(<span class="name">losses</span>)
+<span class="name">normalized</span> <span class="op">=</span> <span class="fn">list</span>(<span class="fn">map</span>(<span class="kw">lambda</span> <span class="name">l</span>: <span class="name">l</span> <span class="op">/</span> <span class="name">max_loss</span>, <span class="name">losses</span>))
+<span class="fn">print</span>(<span class="name">normalized</span>)  <span class="cmt"># [1.0, 0.778, 0.556, 0.333, 0.111]</span></pre></div>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-title">学习技巧：什么时候用 Lambda？</div>
+                        <p>当函数逻辑很简单（只有一行表达式），且只需要临时使用一次时，用 Lambda。如果逻辑复杂或需要复用，还是写普通函数更清晰。AI 生成的代码中 Lambda 出现频率很高，你需要能<strong>读懂</strong>它，但不一定要自己写。</p>
+                    </div>
+
+                    <div class="ai-tip tip-box">
+                        <div class="tip-title">AI 协作提示</div>
+                        <p>在审查 AI 生成的函数代码时，重点关注：<span class="key-point">函数的输入是什么、输出是什么、中间有没有意外的副作用</span>。比如检查函数是否修改了传入的列表（这可能导致难以发现的 Bug）。好的函数应该像"纯函数"一样：相同输入永远产生相同输出。</p>
+                    </div>
+
+                    <!-- 练习题 1.3 -->
+                    <div class="exercise-box">
+                        <div class="tip-title">练习题 1.3</div>
+                        <ol>
+                            <li>编写函数 <code>compute_f1(precision, recall)</code>，根据精确率和召回率计算 F1 分数。公式：<code>F1 = 2 * precision * recall / (precision + recall)</code>。注意处理分母为零的情况。</li>
+                            <li>编写函数 <code>find_best_threshold(losses, thresholds)</code>，接收一个损失列表和一组阈值列表，返回使准确率最高的阈值。使用 <code>*args</code> 或列表推导式。</li>
+                            <li>使用 Lambda 和 <code>filter()</code>，从一个包含模型名称的列表 <code>["resnet50", "bert_base", "gpt2", "vgg16", "efficientnet"]</code> 中筛选出包含数字的名称。</li>
+                        </ol>
                     </div>
                 </div>
 
+                <!-- ========== 1.4 面向对象编程 ========== -->
                 <div class="content-block" id="ch1-oop">
-                    <h3>面向对象编程（OOP）⭐ 重点</h3>
-                    <p>面向对象编程是<strong>重中之重</strong>，因为现代 AI 框架（如 PyTorch）中，神经网络模型本质上都是一个类（Class）。你必须理解 <code>__init__</code> 方法（初始化模型结构）和 <code>forward</code> 方法（定义数据前向传播路径）的基本概念和模板。</p>
+                    <h3>1.4 面向对象编程（OOP）</h3>
+
+                    <!-- 什么是面向对象 -->
+                    <div class="sub-section">什么是面向对象？</div>
+                    <p>想象你是一位汽车设计师。你先画一张<strong>设计图纸</strong>（类，Class），图纸上标注了汽车有几个轮子、什么颜色的漆、能跑多快。然后工厂根据这张图纸，生产出一辆辆<strong>真实的汽车</strong>（对象，Object）。每辆汽车都是独立的，有自己的状态。</p>
+
+                    <div class="knowledge-card">
+                        <div class="tip-title">概念解释：类 = 图纸，对象 = 产品</div>
+                        <p><strong>类（Class）</strong>是创建对象的模板/蓝图，定义了对象有哪些属性（数据）和方法（行为）。<strong>对象（Object）</strong>是根据类创建出来的具体实例。在 AI 框架（如 PyTorch）中，每个神经网络模型都是一个类，你创建的每个具体模型就是一个对象。</p>
+                    </div>
+
+                    <!-- 类和对象 -->
+                    <div class="sub-section">类和对象</div>
+
                     <div class="code-block">
                         <div class="code-header">
                             <div class="code-dots"><span></span><span></span><span></span></div>
-                            <span class="code-lang">Python</span>
+                            <span class="code-lang">Python — 类的基本结构</span>
                         </div>
-                        <div class="code-body"><pre><span class="cmt"># ★ AI 框架中的核心模式：类定义模型</span>
+                        <div class="code-body"><pre><span class="cmt"># ===== 定义一个类 =====</span>
 <span class="kw">class</span> <span class="cls">SimpleModel</span>:
-    <span class="str">"""模拟 AI 框架中的模型定义模式"""</span>
+    <span class="str">"""一个简单的AI模型类"""</span>
 
-    <span class="cmt"># __init__ — 初始化模型结构（定义层和参数）</span>
+    <span class="cmt"># __init__ 是构造方法 —— 创建对象时自动调用</span>
+    <span class="cmt"># self 代表"这个对象自己"</span>
     <span class="kw">def</span> <span class="fn">__init__</span>(<span class="name">self</span>, <span class="name">input_size</span>, <span class="name">hidden_size</span>, <span class="name">output_size</span>):
+        <span class="cmt"># self.属性 = 实例属性（每个对象各自拥有）</span>
         <span class="name">self</span>.<span class="name">input_size</span> <span class="op">=</span> <span class="name">input_size</span>
         <span class="name">self</span>.<span class="name">hidden_size</span> <span class="op">=</span> <span class="name">hidden_size</span>
         <span class="name">self</span>.<span class="name">output_size</span> <span class="op">=</span> <span class="name">output_size</span>
+        <span class="name">self</span>.<span class="name">is_trained</span> <span class="op">=</span> <span class="kw">False</span>  <span class="cmt"># 默认未训练</span>
         <span class="fn">print</span>(<span class="str">f"模型已创建: </span><span class="name">{input_size}</span><span class="str">→</span><span class="name">{hidden_size}</span><span class="str">→</span><span class="name">{output_size}</span><span class="str">"</span>)
 
-    <span class="cmt"># forward — 定义数据前向传播路径</span>
+    <span class="cmt"># 实例方法 —— 定义对象能做什么</span>
     <span class="kw">def</span> <span class="fn">forward</span>(<span class="name">self</span>, <span class="name">x</span>):
-        <span class="cmt"># x 是输入数据</span>
+        <span class="str">"""前向传播：数据从输入流向输出"""</span>
         <span class="name">hidden</span> <span class="op">=</span> [<span class="name">v</span> <span class="op">*</span> <span class="num">0.5</span> <span class="kw">for</span> <span class="name">v</span> <span class="kw">in</span> <span class="name">x</span>]   <span class="cmt"># 模拟隐藏层计算</span>
         <span class="name">output</span> <span class="op">=</span> <span class="fn">sum</span>(<span class="name">hidden</span>) <span class="op">/</span> <span class="fn">len</span>(<span class="name">hidden</span>)  <span class="cmt"># 模拟输出层</span>
         <span class="kw">return</span> <span class="name">output</span>
 
+    <span class="kw">def</span> <span class="fn">train</span>(<span class="name">self</span>):
+        <span class="str">"""训练模型"""</span>
+        <span class="name">self</span>.<span class="name">is_trained</span> <span class="op">=</span> <span class="kw">True</span>
+        <span class="fn">print</span>(<span class="str">"模型训练完成！"</span>)
+
+    <span class="cmt"># __str__ 方法定义了用 print() 打印对象时的显示内容</span>
     <span class="kw">def</span> <span class="fn">__str__</span>(<span class="name">self</span>):
         <span class="kw">return</span> <span class="str">f"SimpleModel(</span><span class="name">{self</span>.<span class="name">input_size}</span><span class="str">, </span><span class="name">{self</span>.<span class="name">hidden_size}</span><span class="str">, </span><span class="name">{self</span>.<span class="name">output_size}</span><span class="str">)"</span>
 
-<span class="cmt"># 使用模型</span>
+<span class="cmt"># ===== 创建对象（实例化）=====</span>
 <span class="name">model</span> <span class="op">=</span> <span class="cls">SimpleModel</span>(<span class="name">input_size</span><span class="op">=</span><span class="num">784</span>, <span class="name">hidden_size</span><span class="op">=</span><span class="num">128</span>, <span class="name">output_size</span><span class="op">=</span><span class="num">10</span>)
-<span class="name">result</span> <span class="op">=</span> <span class="name">model</span>.<span class="fn">forward</span>([<span class="num">1.0</span>, <span class="num">2.0</span>, <span class="num">3.0</span>])
-<span class="fn">print</span>(<span class="str">f"模型输出: </span><span class="name">{result}</span><span class="str">"</span>)</pre></div>
+
+<span class="cmt"># ===== 使用对象 =====</span>
+<span class="fn">print</span>(<span class="name">model</span>)                     <span class="cmt"># 调用 __str__</span>
+<span class="name">result</span> <span class="op">=</span> <span class="name">model</span>.<span class="fn">forward</span>([<span class="num">1.0</span>, <span class="num">2.0</span>, <span class="num">3.0</span>])  <span class="cmt"># 调用方法</span>
+<span class="fn">print</span>(<span class="str">f"模型输出: </span><span class="name">{result}</span><span class="str">"</span>)
+<span class="name">model</span>.<span class="fn">train</span>()                      <span class="cmt"># 训练模型</span>
+<span class="fn">print</span>(<span class="name">model</span>.<span class="name">is_trained</span>)            <span class="cmt"># True</span></pre></div>
                     </div>
+
+                    <div class="tip-box">
+                        <div class="tip-title">学习技巧：self 是什么？</div>
+                        <p><code>self</code> 代表"当前对象自己"。当你写 <code>model.forward(data)</code> 时，Python 实际上在调用 <code>SimpleModel.forward(model, data)</code> —— 自动把 <code>model</code> 作为第一个参数传入。所以类中每个方法的第一个参数都是 <code>self</code>，通过 <code>self.xxx</code> 来访问和修改对象自己的属性。</p>
+                    </div>
+
+                    <!-- AI核心模式 -->
+                    <div class="sub-section">AI 核心模式：模拟 PyTorch 的 nn.Module</div>
+                    <p>在真实的 AI 框架中，神经网络模型都遵循一个统一模式：<code>__init__</code> 中定义网络结构（有哪些层），<code>forward</code> 中定义数据如何流经这些层。这是你<strong>必须理解的核心模板</strong>。</p>
+
                     <div class="code-block">
                         <div class="code-header">
                             <div class="code-dots"><span></span><span></span><span></span></div>
-                            <span class="code-lang">Python — 继承与多态</span>
+                            <span class="code-lang">Python — 模拟 PyTorch 模型模式</span>
                         </div>
-                        <div class="code-body"><pre><span class="cmt"># 继承 — 复用和扩展</span>
-<span class="kw">class</span> <span class="cls">AdvancedModel</span>(<span class="cls">SimpleModel</span>):
-    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="name">self</span>, <span class="name">input_size</span>, <span class="name">hidden_size</span>, <span class="name">output_size</span>, <span class="name">dropout</span><span class="op">=</span><span class="num">0.5</span>):
-        <span class="kw">super</span>().<span class="fn">__init__</span>(<span class="name">input_size</span>, <span class="name">hidden_size</span>, <span class="name">output_size</span>)
-        <span class="name">self</span>.<span class="name">dropout</span> <span class="op">=</span> <span class="name">dropout</span>  <span class="cmt"># 子类新增属性</span>
+                        <div class="code-body"><pre><span class="cmt"># ===== 模拟 PyTorch 的 nn.Module 模式 =====</span>
+<span class="kw">class</span> <span class="cls">ImageClassifier</span>:
+    <span class="str">"""图像分类模型 —— 模拟 PyTorch 的 nn.Module"""</span>
+
+    <span class="cmt"># __init__: 定义模型结构（有哪些层、多少个神经元）</span>
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="name">self</span>, <span class="name">num_classes</span><span class="op">=</span><span class="num">10</span>):
+        <span class="name">self</span>.<span class="name">num_classes</span> <span class="op">=</span> <span class="name">num_classes</span>
+        <span class="name">self</span>.<span class="name">layers</span> <span class="op">=</span> [
+            {<span class="str">"type"</span>: <span class="str">"conv"</span>, <span class="str">"size"</span>: <span class="num">32</span>},
+            {<span class="str">"type"</span>: <span class="str">"conv"</span>, <span class="str">"size"</span>: <span class="num">64</span>},
+            {<span class="str">"type"</span>: <span class="str">"linear"</span>, <span class="str">"size"</span>: <span class="name">num_classes</span>}
+        ]
+        <span class="name">self</span>.<span class="name">is_built</span> <span class="op">=</span> <span class="kw">True</span>
+        <span class="fn">print</span>(<span class="str">f"模型构建完成，共 </span><span class="name">{</span><span class="fn">len</span>(<span class="name">self</span>.<span class="name">layers</span>)<span class="name">}</span><span class="str"> 层，输出 </span><span class="name">{num_classes}</span><span class="str"> 类"</span>)
+
+    <span class="cmt"># forward: 定义数据的前向传播路径</span>
+    <span class="kw">def</span> <span class="fn">forward</span>(<span class="name">self</span>, <span class="name">x</span>):
+        <span class="str">"""数据从输入逐层流向输出"""</span>
+        <span class="fn">print</span>(<span class="str">f"输入形状: </span><span class="name">{x}</span><span class="str">"</span>)
+        <span class="kw">for</span> <span class="name">i</span>, <span class="name">layer</span> <span class="kw">in</span> <span class="fn">enumerate</span>(<span class="name">self</span>.<span class="name">layers</span>):
+            <span class="fn">print</span>(<span class="str">f"  → 经过第</span><span class="name">{i+1}</span><span class="str">层 (</span><span class="name">{layer</span>[<span class="str">'type'</span>]<span class="str">}, size=</span><span class="name">{layer</span>[<span class="str">'size'</span>]<span class="str">)"</span>)
+        <span class="fn">print</span>(<span class="str">f"输出: </span><span class="name">{self</span>.<span class="name">num_classes</span><span class="str"> 个类别的概率"</span>)
+        <span class="kw">return</span> [<span class="num">0.1</span>] <span class="op">*</span> <span class="name">self</span>.<span class="name">num_classes</span>  <span class="cmt"># 模拟输出</span>
+
+<span class="cmt"># ===== 完整的创建和使用流程 =====</span>
+<span class="name">model</span> <span class="op">=</span> <span class="cls">ImageClassifier</span>(<span class="name">num_classes</span><span class="op">=</span><span class="num">10</span>)  <span class="cmt"># 1. 创建模型</span>
+<span class="name">output</span> <span class="op">=</span> <span class="name">model</span>.<span class="fn">forward</span>(<span class="str">"一张28x28的图片"</span>)    <span class="cmt"># 2. 前向传播</span>
+<span class="fn">print</span>(<span class="str">f"预测结果: </span><span class="name">{output}</span><span class="str">"</span>)</pre></div>
+                    </div>
+
+                    <div class="ai-tip tip-box">
+                        <div class="tip-title">为什么 OOP 是重点？</div>
+                        <p>在 PyTorch 中，每个神经网络都是一个继承自 <code>nn.Module</code> 的类。你必须写 <code>__init__</code> 定义网络层，写 <code>forward</code> 定义数据流向。<span class="key-point">理解这个模式，你就能读懂并修改 AI 生成的任何模型代码</span>。这是本课程最重要的知识点。</p>
+                    </div>
+
+                    <!-- 继承 -->
+                    <div class="sub-section">继承</div>
+                    <p>继承允许你创建一个新类，<strong>复用已有类的功能并扩展新功能</strong>。就像"电动汽车"继承了"汽车"的所有属性（轮子、方向盘），同时新增了"电池"属性。</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — 继承</span>
+                        </div>
+                        <div class="code-body"><pre><span class="cmt"># ===== 基类（父类）=====</span>
+<span class="kw">class</span> <span class="cls">SimpleModel</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="name">self</span>, <span class="name">input_size</span>, <span class="name">hidden_size</span>, <span class="name">output_size</span>):
+        <span class="name">self</span>.<span class="name">input_size</span> <span class="op">=</span> <span class="name">input_size</span>
+        <span class="name">self</span>.<span class="name">hidden_size</span> <span class="op">=</span> <span class="name">hidden_size</span>
+        <span class="name">self</span>.<span class="name">output_size</span> <span class="op">=</span> <span class="name">output_size</span>
 
     <span class="kw">def</span> <span class="fn">forward</span>(<span class="name">self</span>, <span class="name">x</span>):
-        <span class="name">hidden</span> <span class="op">=</span> [<span class="name">v</span> <span class="op">*</span> <span class="name">self</span>.<span class="name">dropout</span> <span class="kw">for</span> <span class="name">v</span> <span class="kw">in</span> <span class="name">x</span>]
+        <span class="name">hidden</span> <span class="op">=</span> [<span class="name">v</span> <span class="op">*</span> <span class="num">0.5</span> <span class="kw">for</span> <span class="name">v</span> <span class="kw">in</span> <span class="name">x</span>]
         <span class="kw">return</span> <span class="fn">sum</span>(<span class="name">hidden</span>) <span class="op">/</span> <span class="fn">len</span>(<span class="name">hidden</span>)
 
-<span class="cmt"># 封装 — 保护数据</span>
-<span class="kw">class</span> <span class="cls">TrainingConfig</span>:
-    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="name">self</span>):
-        <span class="name">self</span>.<span class="name">__lr</span> <span class="op">=</span> <span class="num">0.001</span>  <span class="cmt"># 私有属性</span>
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="name">self</span>):
+        <span class="kw">return</span> <span class="str">f"SimpleModel(</span><span class="name">{self</span>.<span class="name">input_size}</span><span class="str">, </span><span class="name">{self</span>.<span class="name">hidden_size}</span><span class="str">, </span><span class="name">{self</span>.<span class="name">output_size}</span><span class="str">)"</span>
 
+<span class="cmt"># ===== 子类（继承父类）=====</span>
+<span class="kw">class</span> <span class="cls">AdvancedModel</span>(<span class="cls">SimpleModel</span>):
+    <span class="str">"""高级模型 —— 在简单模型基础上增加 Dropout"""</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="name">self</span>, <span class="name">input_size</span>, <span class="name">hidden_size</span>, <span class="name">output_size</span>, <span class="name">dropout</span><span class="op">=</span><span class="num">0.5</span>):
+        <span class="cmt"># super() 调用父类的 __init__，复用父类的初始化逻辑</span>
+        <span class="kw">super</span>().<span class="fn">__init__</span>(<span class="name">input_size</span>, <span class="name">hidden_size</span>, <span class="name">output_size</span>)
+        <span class="name">self</span>.<span class="name">dropout</span> <span class="op">=</span> <span class="name">dropout</span>  <span class="cmt"># 子类新增属性</span>
+        <span class="fn">print</span>(<span class="str">f"高级模型已创建，Dropout率=</span><span class="name">{dropout}</span><span class="str">"</span>)
+
+    <span class="cmt"># 方法重写：覆盖父类的 forward 方法</span>
+    <span class="kw">def</span> <span class="fn">forward</span>(<span class="name">self</span>, <span class="name">x</span>):
+        <span class="name">hidden</span> <span class="op">=</span> [<span class="name">v</span> <span class="op">*</span> <span class="name">self</span>.<span class="name">dropout</span> <span class="kw">for</span> <span class="name">v</span> <span class="kw">in</span> <span class="name">x</span>]  <span class="cmt"># 使用 dropout</span>
+        <span class="kw">return</span> <span class="fn">sum</span>(<span class="name">hidden</span>) <span class="op">/</span> <span class="fn">len</span>(<span class="name">hidden</span>)
+
+    <span class="cmt"># 子类新增方法</span>
+    <span class="kw">def</span> <span class="fn">summary</span>(<span class="name">self</span>):
+        <span class="fn">print</span>(<span class="str">f"模型结构: </span><span class="name">{self</span>.<span class="name">input_size}</span><span class="str">→</span><span class="name">{self</span>.<span class="name">hidden_size}</span><span class="str">→</span><span class="name">{self</span>.<span class="name">output_size}</span><span class="str">"</span>)
+        <span class="fn">print</span>(<span class="str">f"Dropout: </span><span class="name">{self</span>.<span class="name">dropout}</span><span class="str">"</span>)
+
+<span class="cmt"># ===== 使用继承 =====</span>
+<span class="name">adv_model</span> <span class="op">=</span> <span class="cls">AdvancedModel</span>(<span class="num">784</span>, <span class="num">256</span>, <span class="num">10</span>, <span class="name">dropout</span><span class="op">=</span><span class="num">0.3</span>)
+<span class="name">adv_model</span>.<span class="fn">summary</span>()        <span class="cmt"># 调用子类新方法</span>
+<span class="fn">print</span>(<span class="name">adv_model</span>)            <span class="cmt"># 调用继承的 __str__</span>
+<span class="name">result</span> <span class="op">=</span> <span class="name">adv_model</span>.<span class="fn">forward</span>([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])  <span class="cmt"># 调用重写的 forward</span></pre></div>
+                    </div>
+
+                    <!-- 封装 -->
+                    <div class="sub-section">封装</div>
+                    <p>封装是"隐藏内部细节，只暴露安全的接口"。就像你用手机不需要知道内部电路怎么走，只需要会按按钮就行。在 Python 中，用<strong>私有属性</strong>和 <code>@property</code> 装饰器来实现封装。</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-lang">Python — 封装</span>
+                        </div>
+                        <div class="code-body"><pre><span class="kw">class</span> <span class="cls">TrainingConfig</span>:
+    <span class="str">"""训练配置类 —— 通过封装保护关键参数"""</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="name">self</span>):
+        <span class="cmt"># 双下划线开头 = 私有属性（外部不能直接访问）</span>
+        <span class="name">self</span>.<span class="name">__learning_rate</span> <span class="op">=</span> <span class="num">0.001</span>
+        <span class="name">self</span>.<span class="name">__max_epochs</span> <span class="op">=</span> <span class="num">100</span>
+        <span class="name">self</span>.<span class="name">__batch_size</span> <span class="op">=</span> <span class="num">32</span>
+
+    <span class="cmt"># @property 装饰器：让私有属性可以通过"属性"方式安全访问</span>
     <span class="dec">@property</span>
     <span class="kw">def</span> <span class="fn">learning_rate</span>(<span class="name">self</span>):
-        <span class="kw">return</span> <span class="name">self</span>.<span class="name">__lr</span>
+        <span class="str">"""获取学习率（getter）"""</span>
+        <span class="kw">return</span> <span class="name">self</span>.<span class="name">__learning_rate</span>
 
+    <span class="cmt"># @xxx.setter 装饰器：设置属性值时进行验证</span>
     <span class="dec">@learning_rate.setter</span>
     <span class="kw">def</span> <span class="fn">learning_rate</span>(<span class="name">self</span>, <span class="name">value</span>):
-        <span class="kw">if</span> <span class="name">value</span> <span class="op"><=</span> <span class="num">0</span>:
-            <span class="kw">raise</span> <span class="cls">ValueError</span>(<span class="str">"学习率必须大于 0"</span>)
-        <span class="name">self</span>.<span class="name">__lr</span> <span class="op">=</span> <span class="name">value</span></pre></div>
+        <span class="str">"""设置学习率（setter）—— 带验证逻辑"""</span>
+        <span class="kw">if</span> <span class="name">value</span> <span class="op">&lt;=</span> <span class="num">0</span>:
+            <span class="kw">raise</span> <span class="cls">ValueError</span>(<span class="str">"学习率必须大于 0！"</span>)
+        <span class="kw">if</span> <span class="name">value</span> <span class="op">&gt;</span> <span class="num">1</span>:
+            <span class="kw">raise</span> <span class="cls">ValueError</span>(<span class="str">"学习率不能大于 1！"</span>)
+        <span class="name">self</span>.<span class="name">__learning_rate</span> <span class="op">=</span> <span class="name">value</span>
+        <span class="fn">print</span>(<span class="str">f"学习率已更新为: </span><span class="name">{value}</span><span class="str">"</span>)
+
+    <span class="dec">@property</span>
+    <span class="kw">def</span> <span class="fn">max_epochs</span>(<span class="name">self</span>):
+        <span class="kw">return</span> <span class="name">self</span>.<span class="name">__max_epochs</span>
+
+    <span class="dec">@max_epochs.setter</span>
+    <span class="kw">def</span> <span class="fn">max_epochs</span>(<span class="name">self</span>, <span class="name">value</span>):
+        <span class="kw">if</span> <span class="name">value</span> <span class="op">&lt;</span> <span class="num">1</span>:
+            <span class="kw">raise</span> <span class="cls">ValueError</span>(<span class="str">"训练轮数至少为 1！"</span>)
+        <span class="name">self</span>.<span class="name">__max_epochs</span> <span class="op">=</span> <span class="name">value</span>
+
+<span class="cmt"># ===== 使用封装 =====</span>
+<span class="name">config</span> <span class="op">=</span> <span class="cls">TrainingConfig</span>()
+
+<span class="cmt"># 读取属性</span>
+<span class="fn">print</span>(<span class="name">config</span>.<span class="name">learning_rate</span>)  <span class="cmt"># 0.001（通过 @property 访问）</span>
+
+<span class="cmt"># 设置属性（会自动验证）</span>
+<span class="name">config</span>.<span class="name">learning_rate</span> <span class="op">=</span> <span class="num">0.0005</span>  <span class="cmt"># ✓ 合法值</span>
+<span class="cmt"># config.learning_rate = -0.1  # ✗ 会报错：ValueError</span>
+<span class="cmt"># config.learning_rate = 2.0   # ✗ 会报错：ValueError</span>
+
+<span class="cmt"># 直接访问私有属性会失败（名称被改写）</span>
+<span class="cmt"># print(config.__learning_rate)  # ✗ 报错！</span></pre></div>
                     </div>
-                    <div class="tip-box ai-tip">
-                        <div class="tip-title">🤖 为什么 OOP 是重点？</div>
-                        <p>在 PyTorch 中，每个神经网络都是一个继承自 <code>nn.Module</code> 的类。你必须写 <code>__init__</code> 定义网络层，写 <code>forward</code> 定义数据流向。理解这个模式，你就能读懂并修改 AI 生成的任何模型代码。</p>
+
+                    <div class="warning-box">
+                        <div class="tip-title">注意：Python 的"私有"不是绝对的</div>
+                        <p>Python 的双下划线私有属性实际上是通过"名称改写"（name mangling）实现的，<code>__lr</code> 会被改写为 <code>_ClassName__lr</code>。所以严格来说仍然可以通过 <code>config._TrainingConfig__learning_rate</code> 访问。Python 的封装更多是"约定"而非"强制"，靠的是开发者自觉。</p>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-title">学习技巧：OOP 的三要素</div>
+                        <p>面向对象编程有三大核心概念：<strong>封装</strong>（隐藏细节、保护数据）、<strong>继承</strong>（复用代码、扩展功能）、<strong>多态</strong>（同一方法在不同类中有不同行为）。本节重点讲了封装和继承。在 AI 框架中，你经常看到继承（自定义模型继承 nn.Module）和封装（通过 property 保护超参数）。</p>
+                    </div>
+
+                    <!-- 练习题 1.4 -->
+                    <div class="exercise-box">
+                        <div class="tip-title">练习题 1.4</div>
+                        <ol>
+                            <li>创建一个 <code>Dataset</code> 类，包含 <code>__init__(self, name, size)</code>、<code>get_info()</code>（返回数据集名称和大小）和 <code>__str__()</code> 方法。创建两个不同的 Dataset 对象并打印。</li>
+                            <li>创建一个基类 <code>BaseOptimizer</code>，包含 <code>__init__(self, lr)</code> 和 <code>step()</code> 方法。创建子类 <code>Adam(BaseOptimizer)</code>，在 <code>step()</code> 中打印"Adam 更新参数，lr=xxx"。使用 <code>super()</code> 调用父类初始化。</li>
+                            <li>创建一个 <code>ModelConfig</code> 类，使用私有属性和 <code>@property</code> 封装 <code>dropout_rate</code>（必须在 0 到 1 之间）。尝试设置非法值（如 1.5），观察报错信息。</li>
+                        </ol>
                     </div>
                 </div>
             </section>
