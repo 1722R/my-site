@@ -813,6 +813,8 @@
         .runner-header-btn.run-btn:hover { background: rgba(67, 160, 71, 0.35); }
         .runner-header-btn.clear-btn { background: rgba(249, 226, 175, 0.1); color: #f9e2af; }
         .runner-header-btn.clear-btn:hover { background: rgba(249, 226, 175, 0.2); }
+        .runner-header-btn.reset-btn { background: rgba(137, 180, 250, 0.1); color: #89b4fa; }
+        .runner-header-btn.reset-btn:hover { background: rgba(137, 180, 250, 0.2); }
 
         .runner-body {
             display: flex;
@@ -2571,6 +2573,7 @@ Step 7: loss = 0.0824
             </div>
             <div class="runner-header-actions">
                 <button class="runner-header-btn run-btn" id="runnerExec" title="运行代码 (Ctrl+Enter)">▶ 运行</button>
+                <button class="runner-header-btn reset-btn" id="runnerReset" title="重置为示例代码">↺ 重置</button>
                 <button class="runner-header-btn clear-btn" id="runnerClear" title="清空输出">✕ 清空</button>
             </div>
         </div>
@@ -2610,6 +2613,9 @@ Step 7: loss = 0.0824
     <script>
         // ===== Create CodeMirror Editor =====
         const defaultCode = '# 欢迎使用 Python 代码运行器！\n# 在这里编写代码，点击 \u25b6 运行查看结果\n\nprint("Hello, Python! \ud83d\udc0d")\nfor i in range(1, 6):\n    print(f"\u7b2c {i} \u6b21\u5faa\u73af")';
+
+        // 保存原始示例代码，用于重置
+        let originalCode = defaultCode;
 
         const editor = CodeMirror(document.getElementById("runnerEditor"), {
             value: defaultCode,
@@ -2698,6 +2704,14 @@ Step 7: loss = 0.0824
             infoEl.textContent = "已清空";
         });
 
+        // ===== Reset Code =====
+        document.getElementById("runnerReset").addEventListener("click", function() {
+            editor.setValue(originalCode);
+            outputEl.innerHTML = "";
+            statusDot.className = "runner-status-dot";
+            infoEl.textContent = "已重置为示例代码";
+        });
+
         // ===== Run Button in Header =====
         document.getElementById("runnerExec").addEventListener("click", runCode);
 
@@ -2725,6 +2739,7 @@ Step 7: loss = 0.0824
                 }
 
                 editor.setValue(code);
+                originalCode = code; // 记住原始示例代码
                 setTimeout(function() { runCode(); }, 200);
             });
 
