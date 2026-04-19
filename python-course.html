@@ -713,371 +713,259 @@
             .nav-progress { display: none; }
             .btn-back-home { display: none; }
             .top-nav { padding: 0 15px; }
+            .code-run-btn { font-size: 0.72rem; padding: 3px 10px; }
+            .runner-panel { width: 100% !important; height: 100% !important; border-radius: 0 !important; }
         }
 
-/* ===== Code Runner Styles ===== */
+        /* ===== Code Runner Panel ===== */
+        .runner-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #43a047, #2e7d32);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(67, 160, 71, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 2000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .runner-fab:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(67, 160, 71, 0.5); }
+        .runner-fab.active { background: linear-gradient(135deg, #e53935, #c62828); box-shadow: 0 4px 20px rgba(229, 57, 53, 0.4); }
 
-/* 代码块运行按钮区域 */
-.code-header-actions {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
+        .runner-panel {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 580px;
+            height: 520px;
+            background: #1e1e2e;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            z-index: 1999;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .runner-panel.open {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
 
-.code-run-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 12px;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: inherit;
-}
+        .runner-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px;
+            background: #181825;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            flex-shrink: 0;
+        }
+        .runner-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .runner-header-title {
+            color: #cdd6f4;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+        .runner-header-badge {
+            background: rgba(67, 160, 71, 0.2);
+            color: #a6e3a1;
+            font-size: 0.68rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        .runner-header-actions {
+            display: flex;
+            gap: 6px;
+        }
+        .runner-header-btn {
+            background: rgba(255,255,255,0.06);
+            border: none;
+            color: #a6adc8;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .runner-header-btn:hover { background: rgba(255,255,255,0.12); color: #cdd6f4; }
+        .runner-header-btn.run-btn { background: rgba(67, 160, 71, 0.2); color: #a6e3a1; }
+        .runner-header-btn.run-btn:hover { background: rgba(67, 160, 71, 0.35); }
+        .runner-header-btn.clear-btn { background: rgba(249, 226, 175, 0.1); color: #f9e2af; }
+        .runner-header-btn.clear-btn:hover { background: rgba(249, 226, 175, 0.2); }
 
-.code-run-btn.run {
-    background: #43a047;
-    color: white;
-}
+        .runner-body {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
 
-.code-run-btn.run:hover {
-    background: #388e3c;
-    transform: translateY(-1px);
-}
+        .runner-editor-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(255,255,255,0.06);
+            min-width: 0;
+        }
+        .runner-editor-label {
+            padding: 6px 14px;
+            font-size: 0.72rem;
+            color: #6c7086;
+            background: rgba(255,255,255,0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+        .runner-editor {
+            flex: 1;
+            overflow: auto;
+        }
+        .runner-editor .CodeMirror {
+            height: 100%;
+            font-size: 0.85rem;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            border-radius: 0;
+        }
+        .runner-editor .CodeMirror-scroll { overflow: auto; }
 
-.code-run-btn.run:active {
-    transform: translateY(0);
-}
+        .runner-output-wrap {
+            width: 220px;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .runner-output-label {
+            padding: 6px 14px;
+            font-size: 0.72rem;
+            color: #6c7086;
+            background: rgba(255,255,255,0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        .runner-output-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .runner-status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #6c7086;
+            transition: background 0.3s;
+        }
+        .runner-status-dot.success { background: #a6e3a1; }
+        .runner-status-dot.error { background: #f38ba8; }
+        .runner-status-dot.running { background: #f9e2af; animation: pulse 1s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-.code-run-btn.run.running {
-    background: #f57c00;
-    pointer-events: none;
-}
+        .runner-output {
+            flex: 1;
+            overflow: auto;
+            padding: 12px 14px;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: #cdd6f4;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .runner-output:empty::before {
+            content: '点击 ▶ 运行 查看输出...';
+            color: #6c7086;
+            font-style: italic;
+        }
+        .runner-output .output-error { color: #f38ba8; }
+        .runner-output .output-success { color: #a6e3a1; }
 
-.code-run-btn.open-in-editor {
-    background: rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.7);
-}
+        .runner-footer {
+            padding: 8px 18px;
+            background: #181825;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        .runner-footer-info {
+            color: #6c7086;
+            font-size: 0.72rem;
+        }
+        .runner-footer-hint {
+            color: #585b70;
+            font-size: 0.7rem;
+        }
 
-.code-run-btn.open-in-editor:hover {
-    background: rgba(255,255,255,0.2);
-    color: white;
-}
+        /* Code block run button */
+        .code-run-btn {
+            position: absolute;
+            top: 8px;
+            right: 60px;
+            background: rgba(67, 160, 71, 0.15);
+            color: #a6e3a1;
+            border: 1px solid rgba(67, 160, 71, 0.3);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            cursor: pointer;
+            font-family: 'Noto Sans SC', sans-serif;
+            transition: all 0.2s;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .code-run-btn:hover { background: rgba(67, 160, 71, 0.3); border-color: rgba(67, 160, 71, 0.5); }
+        .code-header { position: relative; }
 
-/* 代码块内嵌输出 */
-.code-output {
-    background: #0d1117;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 12px 18px;
-    font-family: 'Fira Code', 'Consolas', monospace;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: #cdd6f4;
-    display: none;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.code-output.visible {
-    display: block;
-}
-
-.code-output .output-line {
-    margin: 0;
-}
-
-.code-output .output-error {
-    color: #f38ba8;
-}
-
-.code-output .output-result {
-    color: #a6e3a1;
-}
-
-.code-output .output-prefix {
-    color: #6c7086;
-    user-select: none;
-}
-
-/* 悬浮编辑器面板 */
-.runner-fab {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #43a047, #2e7d32);
-    color: white;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(67, 160, 71, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    z-index: 2000;
-    transition: all 0.3s ease;
-    animation: fab-pulse 2s infinite;
-}
-
-.runner-fab:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(67, 160, 71, 0.5);
-}
-
-.runner-fab.hidden {
-    display: none;
-}
-
-@keyframes fab-pulse {
-    0%, 100% { box-shadow: 0 4px 20px rgba(67, 160, 71, 0.4); }
-    50% { box-shadow: 0 4px 30px rgba(67, 160, 71, 0.6); }
-}
-
-/* 编辑器面板 */
-.runner-panel {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 560px;
-    max-height: 70vh;
-    background: #1e1e2e;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    z-index: 2001;
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-    animation: panel-slide-up 0.3s ease;
-}
-
-.runner-panel.open {
-    display: flex;
-}
-
-@keyframes panel-slide-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.runner-panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 18px;
-    background: rgba(255,255,255,0.04);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    cursor: move;
-    user-select: none;
-}
-
-.runner-panel-header .panel-title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #cdd6f4;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-.runner-panel-header .panel-title .status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #6c7086;
-    transition: background 0.3s;
-}
-
-.runner-panel-header .panel-title .status-dot.loading {
-    background: #f57c00;
-    animation: dot-blink 1s infinite;
-}
-
-.runner-panel-header .panel-title .status-dot.ready {
-    background: #43a047;
-}
-
-.runner-panel-header .panel-title .status-dot.error {
-    background: #f38ba8;
-}
-
-@keyframes dot-blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-
-.runner-panel-actions {
-    display: flex;
-    gap: 6px;
-}
-
-.runner-panel-actions button {
-    padding: 5px 14px;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.78rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: inherit;
-}
-
-.btn-panel-run {
-    background: #43a047;
-    color: white;
-}
-
-.btn-panel-run:hover { background: #388e3c; }
-.btn-panel-run:disabled { background: #6c7086; cursor: not-allowed; }
-
-.btn-panel-clear {
-    background: rgba(255,255,255,0.08);
-    color: #cdd6f4;
-}
-
-.btn-panel-clear:hover { background: rgba(255,255,255,0.15); }
-
-.btn-panel-close {
-    background: rgba(243, 139, 168, 0.15);
-    color: #f38ba8;
-    padding: 5px 10px;
-}
-
-.btn-panel-close:hover { background: rgba(243, 139, 168, 0.3); }
-
-/* 编辑器区域 */
-.runner-editor-wrap {
-    height: 250px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-
-.runner-editor-wrap #ace-editor {
-    height: 100%;
-    width: 100%;
-    font-size: 13px;
-}
-
-/* 输出区域 */
-.runner-output {
-    padding: 14px 18px;
-    min-height: 60px;
-    max-height: 200px;
-    overflow-y: auto;
-    font-family: 'Fira Code', 'Consolas', monospace;
-    font-size: 0.82rem;
-    line-height: 1.6;
-    color: #cdd6f4;
-    background: #181825;
-}
-
-.runner-output:empty::before {
-    content: '输出将显示在这里...';
-    color: #6c7086;
-    font-style: italic;
-}
-
-.runner-output .out-error {
-    color: #f38ba8;
-}
-
-.runner-output .out-result {
-    color: #a6e3a1;
-}
-
-.runner-output .out-stdout {
-    color: #cdd6f4;
-    white-space: pre-wrap;
-}
-
-/* 加载遮罩 */
-.runner-loading-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(30, 30, 46, 0.9);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    z-index: 10;
-    border-radius: 16px;
-}
-
-.runner-loading-overlay.hidden {
-    display: none;
-}
-
-.loading-spinner {
-    width: 32px;
-    height: 32px;
-    border: 3px solid rgba(255,255,255,0.1);
-    border-top-color: #43a047;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-.loading-text {
-    color: #cdd6f4;
-    font-size: 0.85rem;
-}
-
-.loading-progress {
-    width: 200px;
-    height: 4px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 2px;
-    overflow: hidden;
-}
-
-.loading-progress-bar {
-    height: 100%;
-    background: #43a047;
-    border-radius: 2px;
-    width: 0%;
-    transition: width 0.3s;
-}
-
-/* 响应式 */
-@media (max-width: 1024px) {
-    .runner-panel {
-        width: calc(100vw - 40px);
-        right: 20px;
-        bottom: 20px;
-        max-height: 60vh;
-    }
-    .runner-fab {
-        bottom: 20px;
-        right: 20px;
-    }
-}
-
-@media (max-width: 600px) {
-    .runner-panel {
-        width: calc(100vw - 20px);
-        right: 10px;
-        bottom: 10px;
-        max-height: 55vh;
-    }
-    .code-run-btn {
-        padding: 3px 8px;
-        font-size: 0.7rem;
-    }
-    .code-run-btn .btn-text {
-        display: none;
-    }
-}
-
+        /* Skulpt loading overlay */
+        .runner-loading {
+            position: absolute;
+            inset: 0;
+            background: rgba(30, 30, 46, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            border-radius: 16px;
+        }
+        .runner-loading-spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #a6e3a1;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.6/ace.js"></script>
 </head>
 <body>
 
@@ -2623,34 +2511,6 @@ Step 7: loss = 0.0824
         </main>
     </div>
 
-    <!-- ===== Python Code Runner ===== -->
-    <button class="runner-fab" id="runnerFab" title="打开 Python 编辑器">▶</button>
-
-    <div class="runner-panel" id="runnerPanel">
-        <div class="runner-loading-overlay" id="runnerLoading">
-            <div class="loading-spinner"></div>
-            <div class="loading-text" id="loadingText">正在加载 Python 运行时...</div>
-            <div class="loading-progress">
-                <div class="loading-progress-bar" id="loadingBar"></div>
-            </div>
-        </div>
-        <div class="runner-panel-header">
-            <div class="panel-title">
-                <span class="status-dot loading" id="statusDot"></span>
-                <span>Python 在线编辑器</span>
-            </div>
-            <div class="runner-panel-actions">
-                <button class="btn-panel-run" id="panelRunBtn" disabled>▶ 运行</button>
-                <button class="btn-panel-clear" id="panelClearBtn">清空</button>
-                <button class="btn-panel-close" id="panelCloseBtn">✕</button>
-            </div>
-        </div>
-        <div class="runner-editor-wrap">
-            <div id="ace-editor">print("Hello, World!")</div>
-        </div>
-        <div class="runner-output" id="panelOutput"></div>
-    </div>
-
     <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -2696,276 +2556,180 @@ Step 7: loss = 0.0824
             document.getElementById('sidebar').classList.toggle('open');
         });
     </script>
-<script>
-(function() {
-    'use strict';
 
-    // ===== 配置 =====
-    const WORKER_URL = 'pyodide-worker.js';
+    <!-- ===== Code Runner FAB & Panel ===== -->
+    <button class="runner-fab" id="runnerFab" title="代码运行器">▶</button>
 
-    // ===== DOM 元素 =====
-    const fab = document.getElementById('runnerFab');
-    const panel = document.getElementById('runnerPanel');
-    const panelRunBtn = document.getElementById('panelRunBtn');
-    const panelClearBtn = document.getElementById('panelClearBtn');
-    const panelCloseBtn = document.getElementById('panelCloseBtn');
-    const panelOutput = document.getElementById('panelOutput');
-    const loadingOverlay = document.getElementById('runnerLoading');
-    const loadingText = document.getElementById('loadingText');
-    const loadingBar = document.getElementById('loadingBar');
-    const statusDot = document.getElementById('statusDot');
+    <div class="runner-panel" id="runnerPanel">
+        <div class="runner-loading" id="runnerLoading" style="display:none;">
+            <div class="runner-loading-spinner"></div>
+        </div>
+        <div class="runner-header">
+            <div class="runner-header-left">
+                <span class="runner-header-title">Python 代码运行器</span>
+                <span class="runner-header-badge">Skulpt</span>
+            </div>
+            <div class="runner-header-actions">
+                <button class="runner-header-btn run-btn" id="runnerExec" title="运行代码 (Ctrl+Enter)">▶ 运行</button>
+                <button class="runner-header-btn clear-btn" id="runnerClear" title="清空输出">✕ 清空</button>
+            </div>
+        </div>
+        <div class="runner-body">
+            <div class="runner-editor-wrap">
+                <div class="runner-editor-label">编辑器 — Python</div>
+                <div class="runner-editor" id="runnerEditor"></div>
+            </div>
+            <div class="runner-output-wrap">
+                <div class="runner-output-label">
+                    <span>输出</span>
+                    <div class="runner-output-status">
+                        <div class="runner-status-dot" id="runnerStatusDot"></div>
+                    </div>
+                </div>
+                <div class="runner-output" id="runnerOutput"></div>
+            </div>
+        </div>
+        <div class="runner-footer">
+            <span class="runner-footer-info" id="runnerInfo">就绪</span>
+            <span class="runner-footer-hint">Ctrl + Enter 运行</span>
+        </div>
+    </div>
 
-    // ===== Ace Editor 初始化 =====
-    let aceEditor = null;
-    function initAceEditor() {
-        if (aceEditor) return;
-        aceEditor = ace.edit('ace-editor');
-        aceEditor.setTheme('ace/theme/monokai');
-        aceEditor.session.setMode('ace/mode/python');
-        aceEditor.setOptions({
-            fontSize: '13px',
-            showPrintMargin: false,
+    <!-- Skulpt CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+
+    <!-- CodeMirror 5 — stable, single CDN, Python mode built-in -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+
+    <script>
+        // ===== Create CodeMirror Editor =====
+        const defaultCode = '# 欢迎使用 Python 代码运行器！\n# 在这里编写代码，点击 \u25b6 运行查看结果\n\nprint("Hello, Python! \ud83d\udc0d")\nfor i in range(1, 6):\n    print(f"\u7b2c {i} \u6b21\u5faa\u73af")';
+
+        const editor = CodeMirror(document.getElementById("runnerEditor"), {
+            value: defaultCode,
+            mode: "python",
+            theme: "material-darker",
+            lineNumbers: true,
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            indentUnit: 4,
             tabSize: 4,
-            useSoftTabs: true,
-            wrap: true,
-            enableBasicAutocompletion: true,
+            lineWrapping: true,
+            extraKeys: {
+                "Ctrl-Enter": function() { runCode(); },
+                "Tab": function(cm) { cm.replaceSelection("    ", "end"); }
+            }
         });
-    }
 
-    // ===== Web Worker 通信 =====
-    let worker = null;
-    let msgId = 0;
-    const pending = new Map();
-    let pyodideReady = false;
+        // ===== Panel Toggle =====
+        const fab = document.getElementById("runnerFab");
+        const panel = document.getElementById("runnerPanel");
+        let panelOpen = false;
 
-    function initWorker() {
-        worker = new Worker(WORKER_URL, { type: 'module' });
+        fab.addEventListener("click", function() {
+            panelOpen = !panelOpen;
+            panel.classList.toggle("open", panelOpen);
+            fab.classList.toggle("active", panelOpen);
+            fab.textContent = panelOpen ? "\u2715" : "\u25b6";
+            if (panelOpen) setTimeout(function() { editor.refresh(); editor.focus(); }, 100);
+        });
 
-        worker.onmessage = (event) => {
-            const { type, id, ...data } = event.data;
+        // ===== Skulpt Runner =====
+        const outputEl = document.getElementById("runnerOutput");
+        const statusDot = document.getElementById("runnerStatusDot");
+        const infoEl = document.getElementById("runnerInfo");
 
-            if (type === 'status') {
-                if (data.message === 'loading') {
-                    updateStatus('loading', '正在加载 Python 运行时...');
-                    simulateProgress();
-                } else if (data.message === 'ready') {
-                    pyodideReady = true;
-                    updateStatus('ready', '就绪');
-                    loadingOverlay.classList.add('hidden');
-                    panelRunBtn.disabled = false;
-                    enableCodeBlockButtons();
-                } else if (data.message === 'error') {
-                    updateStatus('error', '加载失败');
-                    loadingText.textContent = '加载失败: ' + (data.error || '未知错误');
-                }
+        function runCode() {
+            if (typeof Sk === "undefined") {
+                outputEl.innerHTML = '<span class="output-error">Skulpt 正在加载，请稍候...</span>';
                 return;
             }
 
-            const resolve = pending.get(id);
-            if (resolve) {
-                resolve(data);
-                pending.delete(id);
+            const code = editor.getValue();
+            outputEl.innerHTML = "";
+            statusDot.className = "runner-status-dot running";
+            infoEl.textContent = "运行中...";
+
+            let outputText = "";
+
+            function outf(text) { outputText += text; }
+
+            function builtinRead(x) {
+                if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                    throw "File not found: '" + x + "'";
+                return Sk.builtinFiles["files"][x];
             }
-        };
 
-        worker.onerror = (error) => {
-            console.error('Worker error:', error);
-            updateStatus('error', 'Worker 错误');
-            loadingText.textContent = 'Worker 加载失败，请刷新页面重试';
-        };
+            Sk.configure({
+                output: outf,
+                read: builtinRead,
+                __future__: Sk.python3
+            });
 
-        // 发送初始化指令
-        worker.postMessage({ id: 0, action: 'init' });
-    }
+            const startTime = performance.now();
 
-    function sendToWorker(action, payload) {
-        const id = ++msgId;
-        return new Promise((resolve) => {
-            pending.set(id, resolve);
-            worker.postMessage({ id, action, ...payload });
+            Sk.misceval.asyncToPromise(function () {
+                return Sk.importMainWithBody("<stdin>", false, code, true);
+            }).then(function () {
+                const elapsed = (performance.now() - startTime).toFixed(0);
+                outputEl.textContent = outputText;
+                statusDot.className = "runner-status-dot success";
+                infoEl.textContent = "完成 \u00b7 " + elapsed + "ms";
+            }).catch(function (err) {
+                const elapsed = (performance.now() - startTime).toFixed(0);
+                const div = document.createElement("div");
+                div.textContent = err.toString();
+                outputEl.innerHTML = '<span class="output-error">' + div.innerHTML + '</span>';
+                statusDot.className = "runner-status-dot error";
+                infoEl.textContent = "错误 \u00b7 " + elapsed + "ms";
+            });
+        }
+
+        // ===== Clear Output =====
+        document.getElementById("runnerClear").addEventListener("click", function() {
+            outputEl.innerHTML = "";
+            statusDot.className = "runner-status-dot";
+            infoEl.textContent = "已清空";
         });
-    }
 
-    // ===== 状态管理 =====
-    function updateStatus(state, text) {
-        statusDot.className = 'status-dot ' + state;
-        if (text && loadingText) loadingText.textContent = text;
-    }
+        // ===== Run Button in Header =====
+        document.getElementById("runnerExec").addEventListener("click", runCode);
 
-    function simulateProgress() {
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += Math.random() * 15;
-            if (progress > 90) progress = 90;
-            loadingBar.style.width = progress + '%';
-            if (pyodideReady) {
-                clearInterval(interval);
-                loadingBar.style.width = '100%';
-            }
-        }, 500);
-    }
-
-    // ===== 面板控制 =====
-    let panelOpen = false;
-
-    fab.addEventListener('click', () => {
-        openPanel();
-    });
-
-    panelCloseBtn.addEventListener('click', () => {
-        closePanel();
-    });
-
-    function openPanel() {
-        panelOpen = true;
-        panel.classList.add('open');
-        fab.classList.add('hidden');
-        initAceEditor();
-        aceEditor.resize();
-        if (!worker) initWorker();
-    }
-
-    function closePanel() {
-        panelOpen = false;
-        panel.classList.remove('open');
-        fab.classList.remove('hidden');
-    }
-
-    // ===== 运行代码 =====
-    panelRunBtn.addEventListener('click', () => {
-        runCode(aceEditor.getValue(), panelOutput);
-    });
-
-    panelClearBtn.addEventListener('click', () => {
-        panelOutput.innerHTML = '';
-    });
-
-    async function runCode(code, outputEl) {
-        if (!pyodideReady) {
-            outputEl.innerHTML = '<span class="out-error">Python 运行时尚未加载完成，请稍候...</span>';
-            return;
-        }
-
-        outputEl.innerHTML = '';
-        panelRunBtn.disabled = true;
-        panelRunBtn.textContent = '运行中...';
-
-        try {
-            const response = await sendToWorker('run', { code });
-
-            if (response.stdout) {
-                outputEl.innerHTML += '<div class="out-stdout">' + escapeHtml(response.stdout) + '</div>';
-            }
-            if (response.stderr) {
-                outputEl.innerHTML += '<div class="out-error">' + escapeHtml(response.stderr) + '</div>';
-            }
-            if (response.error) {
-                outputEl.innerHTML += '<div class="out-error">' + escapeHtml(response.error) + '</div>';
-            }
-            if (response.result !== null && response.result !== undefined) {
-                outputEl.innerHTML += '<div class="out-result">' + escapeHtml(response.result) + '</div>';
-            }
-        } catch (e) {
-            outputEl.innerHTML = '<div class="out-error">运行出错: ' + escapeHtml(e.message) + '</div>';
-        }
-
-        panelRunBtn.disabled = false;
-        panelRunBtn.textContent = '\u25B6 运行';
-    }
-
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    // ===== 代码块内嵌运行按钮 =====
-    function addCodeBlockButtons() {
-        document.querySelectorAll('.code-block').forEach(block => {
-            const header = block.querySelector('.code-header');
+        // ===== Add Run Buttons to All Code Blocks =====
+        document.querySelectorAll(".code-block").forEach(function(block) {
+            const header = block.querySelector(".code-header");
             if (!header) return;
 
-            // 避免重复添加
-            if (header.querySelector('.code-header-actions')) return;
+            const btn = document.createElement("button");
+            btn.className = "code-run-btn";
+            btn.innerHTML = "\u25b6 运行";
+            btn.title = "在代码运行器中运行此代码";
 
-            const actions = document.createElement('div');
-            actions.className = 'code-header-actions';
+            btn.addEventListener("click", function(e) {
+                e.stopPropagation();
+                const pre = block.querySelector(".code-body pre");
+                if (!pre) return;
+                let code = pre.textContent || pre.innerText;
 
-            // 运行按钮
-            const runBtn = document.createElement('button');
-            runBtn.className = 'code-run-btn run';
-            runBtn.disabled = true;
-            runBtn.innerHTML = '<span class="btn-icon">\u25B6</span><span class="btn-text">运行</span>';
-            runBtn.addEventListener('click', () => {
-                const code = extractCode(block);
-                // 创建或获取输出区域
-                let output = block.querySelector('.code-output');
-                if (!output) {
-                    output = document.createElement('div');
-                    output.className = 'code-output';
-                    block.appendChild(output);
+                if (!panelOpen) {
+                    panelOpen = true;
+                    panel.classList.add("open");
+                    fab.classList.add("active");
+                    fab.textContent = "\u2715";
                 }
-                output.classList.add('visible');
-                output.innerHTML = '<span class="output-prefix">运行中...</span>';
-                runBtn.classList.add('running');
-                runBtn.innerHTML = '<span class="btn-icon">\u23F3</span><span class="btn-text">运行中</span>';
 
-                runCode(code, output).then(() => {
-                    runBtn.classList.remove('running');
-                    runBtn.innerHTML = '<span class="btn-icon">\u25B6</span><span class="btn-text">运行</span>';
-                });
+                editor.setValue(code);
+                setTimeout(function() { runCode(); }, 200);
             });
 
-            // 在编辑器中打开按钮
-            const openBtn = document.createElement('button');
-            openBtn.className = 'code-run-btn open-in-editor';
-            openBtn.innerHTML = '\uD83D\uDCCB 编辑';
-            openBtn.addEventListener('click', () => {
-                const code = extractCode(block);
-                openPanel();
-                setTimeout(() => {
-                    aceEditor.setValue(code, -1);
-                    aceEditor.focus();
-                }, 100);
-            });
-
-            actions.appendChild(runBtn);
-            actions.appendChild(openBtn);
-            header.appendChild(actions);
+            header.appendChild(btn);
         });
-    }
-
-    function enableCodeBlockButtons() {
-        document.querySelectorAll('.code-run-btn.run').forEach(btn => {
-            btn.disabled = false;
-        });
-    }
-
-    // 从代码块中提取纯文本代码
-    function extractCode(block) {
-        const pre = block.querySelector('pre');
-        if (!pre) return '';
-        // 获取纯文本，去除 HTML 标签
-        return pre.textContent || pre.innerText;
-    }
-
-    // ===== 键盘快捷键 =====
-    document.addEventListener('keydown', (e) => {
-        // Ctrl+Enter 运行代码（面板打开时）
-        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && panelOpen) {
-            e.preventDefault();
-            panelRunBtn.click();
-        }
-        // Escape 关闭面板
-        if (e.key === 'Escape' && panelOpen) {
-            closePanel();
-        }
-    });
-
-    // ===== 初始化 =====
-    addCodeBlockButtons();
-
-})();
-</script>
+    </script>
 </body>
 </html>
